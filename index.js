@@ -219,7 +219,7 @@ client.on('interactionCreate', async interaction => {
         }
 
         if (interaction.commandName === 'map') {
-            await interaction.deferReply();
+            await interaction.reply({ content: "🛰️ **Deploying satellites to scan the globe...**\n*Taking a live photo of the dashboard...*" });
             await sendInteractiveMap(interaction, 'nations');
         }
     }
@@ -228,7 +228,9 @@ client.on('interactionCreate', async interaction => {
     // BUTTON INTERACTIONS
     // ==========================================
     if (interaction.isButton()) {
-        await interaction.deferUpdate();
+        const targetView = interaction.customId === 'view_continents' ? 'Continents' : 'Nations';
+        await interaction.update({ content: `🛰️ **Re-calibrating satellites to view ${targetView}...**\n*Processing new high-res image...*`, components: [] });
+        
         if (interaction.customId === 'view_nations') {
             await sendInteractiveMap(interaction, 'nations', true);
         } else if (interaction.customId === 'view_continents') {
