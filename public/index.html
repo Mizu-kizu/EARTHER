@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Territory Tracker</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <style>
+    :root {
+        --bg-color: #0f172a;
+        --text-color: #f8fafc;
+        --card-bg: rgba(30, 41, 59, 0.7);
+        --border-color: rgba(255, 255, 255, 0.1);
+        --primary: #3b82f6;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-image: 
+            radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
+            radial-gradient(circle at 85% 30%, rgba(239, 68, 68, 0.15), transparent 25%);
+    }
+
+    .container {
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--border-color);
+        border-radius: 24px;
+        padding: 2rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        width: 95%;
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        position: relative;
+        margin: 2rem 0;
+    }
+
+    .header {
+        text-align: center;
+    }
+
+    .header h1 {
+        margin: 0 0 0.5rem 0;
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #60a5fa, #a78bfa);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .header p {
+        margin: 0;
+        color: #94a3b8;
+        font-size: 0.95rem;
+    }
+
+    .layout {
+        display: flex;
+        width: 100%;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+
+    .map-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        background: rgba(15, 23, 42, 0.5);
+        border-radius: 16px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        height: 500px;
+        position: relative;
+    }
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    #panel {
+        width: 240px;
+        height: 500px;
+        background: rgba(2, 6, 23, 0.6);
+        border-radius: 16px;
+        padding: 15px;
+        overflow-y: auto;
+        border: 1px solid var(--border-color);
+        box-sizing: border-box;
+    }
+
+    #title {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #cbd5e1;
+    }
+
+    .entry {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 10px;
+        margin-bottom: 6px;
+        background: rgba(30, 41, 59, 0.8);
+        border-radius: 8px;
+        font-size: 0.85rem;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .entry span {
+        font-weight: bold;
+        color: var(--primary);
+    }
+
+    path {
+        stroke: var(--bg-color);
+        stroke-width: 0.5;
+        cursor: pointer;
+        transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    path:hover {
+        opacity: 0.8;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+    }
+
+    #tooltip {
+        position: absolute;
+        background: rgba(2, 6, 23, 0.9);
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        pointer-events: none;
+        opacity: 0;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+        transition: opacity 0.2s;
+    }
+
+    .legend {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: #cbd5e1;
+    }
+
+    .legend-color {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+    }
+
+    .controls {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .status {
+        font-size: 0.9rem;
+        color: #94a3b8;
+        font-weight: 500;
+    }
+
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="container">
+      <div class="header">
+          <h1>Discord Territory Tracker</h1>
+          <p>Live map synced directly with your Discord server! Use <kbd>/claim [country]</kbd> in Discord to claim your land.</p>
+      </div>
+
+      <div class="layout">
+          <div class="map-container">
+              <svg id="map"></svg>
+          </div>
+          
+          <div id="panel">
+              <div id="title">Live Leaderboard 🌍</div>
+              <div id="leaderboard-entries" style="margin-top: 15px;">
+                  <div style="text-align: center; color: #64748b; font-size: 0.8rem; margin-top: 20px;">Waiting for Discord data...</div>
+              </div>
+          </div>
+      </div>
+
+      <div class="legend" id="legend"></div>
+
+      <div class="controls">
+          <div class="status" id="stats">Total Members Claimed: 0</div>
+      </div>
+  </div>
+
+<div id="tooltip"></div>
+
+<script>
+// Logic to determine which view to show (nations vs continents)
+const urlParams = new URLSearchParams(window.location.search);
+const viewMode = urlParams.get('view') || 'nations';
+
+// Update Title based on view
+document.getElementById('title').innerText = viewMode === 'continents' ? 'Continents Leaderboard 🗺️' : 'Nations Leaderboard 🌍';
+
+// --- COLOR LOGIC ---
+const COLOR_STATES = [
+  { clicks: 0, color: '#1e293b', label: '0 Clicks (Default)' },
+  { clicks: 1, color: '#ef4444', label: '1 Member (Red)' },
+  { clicks: 2, color: '#3b82f6', label: '2 Members (Blue)' },
+  { clicks: 3, color: '#10b981', label: '3 Members (Green)' },
+  { clicks: 4, color: '#f59e0b', label: '4 Members (Yellow)' },
+  { clicks: 5, color: '#8b5cf6', label: '5 Members (Purple)' }
+];
+
+function getColor(c){
+  if (c < COLOR_STATES.length) {
+    return COLOR_STATES[c].color;
+  }
+  const hue = (c * 137.5) % 360;
+  return `hsl(${hue}, 75%, 60%)`;
+}
+
+// Render the color legend
+function renderLegend() {
+    const legendEl = document.getElementById('legend');
+    COLOR_STATES.forEach(state => {
+        const item = document.createElement('div');
+        item.className = 'legend-item';
+        item.innerHTML = `
+            <div class="legend-color" style="background-color: ${state.color}"></div>
+            <span>${state.label}</span>
+        `;
+        legendEl.appendChild(item);
+    });
+}
+renderLegend();
+
+// --- D3 MAP LOGIC ---
+const svg = d3.select("#map");
+const g = svg.append("g");
+
+const projection = d3.geoMercator()
+  .scale(110)
+  .translate([320, 280]); 
+
+const path = d3.geoPath().projection(projection);
+
+svg.call(d3.zoom().scaleExtent([1,8]).on("zoom", e => {
+  g.attr("transform", e.transform);
+}));
+
+const tooltip = d3.select("#tooltip");
+
+// LIVE DATA STATE
+let nationCounts = {};
+let continentCounts = {};
+let mapFeatures = null;
+
+// LOAD MAP ONCE
+d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+.then(data => {
+  mapFeatures = data.features;
+  renderInitialMap();
+  
+  // Start polling the bot server!
+  fetchLiveData();
+  setInterval(fetchLiveData, 5000); // Check every 5 seconds
+});
+
+function renderInitialMap() {
+  g.selectAll("path")
+    .data(mapFeatures)
+    .enter()
+    .append("path")
+    .attr("d", path)
+    .attr("id", d => `nation-${d.properties.name.replace(/[^a-zA-Z0-9]/g, '-')}`)
+    .style("fill", d => getColor(0)) // Start empty
+
+    // HOVER (mouse)
+    .on("mousemove", (e,d)=>{
+      const c = nationCounts[d.properties.name] || 0;
+      tooltip.style("opacity",1)
+        .html(`${d.properties.name} (${c} Members)`)
+        .style("left",(e.pageX+10)+"px")
+        .style("top",(e.pageY-20)+"px");
+    })
+    .on("mouseleave", ()=>tooltip.style("opacity",0))
+}
+
+// FETCH LIVE DISCORD DATA
+async function fetchLiveData() {
+    try {
+        const res = await fetch('/api/counts');
+        if (!res.ok) throw new Error('API Error');
+        const newData = await res.json();
+        
+        let dataChanged = false;
+        
+        // Update Nations State
+        for (const [country, count] of Object.entries(newData.nations)) {
+            if (count <= 0) {
+                if (nationCounts[country] !== undefined) {
+                    const pathId = `#nation-${country.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                    d3.select(pathId).style("fill", getColor(0));
+                    delete nationCounts[country];
+                    dataChanged = true;
+                }
+                continue;
+            }
+            if (nationCounts[country] !== count) {
+                nationCounts[country] = count;
+                dataChanged = true;
+                
+                // Animate map color
+                const pathId = `#nation-${country.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                const el = d3.select(pathId);
+                if (!el.empty()) {
+                    el.style("fill", getColor(count));
+                    el.node().animate([
+                        { filter: 'brightness(1)' },
+                        { filter: 'brightness(1.5)' },
+                        { filter: 'brightness(1)' }
+                    ], { duration: 500, easing: 'ease-out' });
+                }
+            }
+        }
+        
+        // Find removed values
+        for (const country of Object.keys(nationCounts)) {
+            if (newData.nations[country] === undefined || newData.nations[country] <= 0) {
+                const pathId = `#nation-${country.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                const el = d3.select(pathId);
+                if (!el.empty()) el.style("fill", getColor(0));
+                delete nationCounts[country];
+                dataChanged = true;
+            }
+        }
+
+        // Update Continents State
+        for (const [continent, count] of Object.entries(newData.continents)) {
+            if (count <= 0) {
+                if (continentCounts[continent] !== undefined) {
+                    delete continentCounts[continent];
+                    dataChanged = true;
+                }
+                continue;
+            }
+            if (continentCounts[continent] !== count) {
+                continentCounts[continent] = count;
+                dataChanged = true;
+            }
+        }
+        for (const continent of Object.keys(continentCounts)) {
+            if (newData.continents[continent] === undefined || newData.continents[continent] <= 0) {
+                delete continentCounts[continent];
+                dataChanged = true;
+            }
+        }
+        
+        if (dataChanged || Object.keys(nationCounts).length === 0) {
+            updateLeaderboard();
+        }
+        
+    } catch (err) {
+        console.error("Waiting for Discord Bot connection...", err);
+    }
+}
+
+function updateLeaderboard(){
+    const panel = d3.select("#leaderboard-entries");
+    panel.selectAll(".entry").remove();
+    panel.html("");
+
+    const targetCounts = viewMode === 'continents' ? continentCounts : nationCounts;
+    
+    // Filter out 0s
+    const filteredEntries = Object.entries(targetCounts).filter(([n,c]) => c > 0);
+    const totalClicks = filteredEntries.reduce((a,b)=>a+b[1], 0);
+
+    const sorted = filteredEntries.sort((a,b)=>b[1]-a[1]);
+    
+    if (sorted.length === 0) {
+        panel.append("div")
+            .attr("style", "text-align: center; color: #94a3b8; font-size: 0.95rem; margin-top: 30px;")
+            .html(`Nobody has claimed any ${viewMode} yet! <br><br><span style="font-size: 2rem;">😢</span><br><br>Use <b>/claim [country]</b> in Discord to start the map!`);
+    } else {
+        sorted.forEach(([n,c],i)=>{
+            panel.append("div")
+              .attr("class","entry")
+              .html(`${i+1}. ${n} <span>${c}</span>`);
+        });
+    }
+
+    d3.select("#stats").text(`Total Members Claimed: ` + totalClicks);
+}
+</script>
+
+</body>
+</html>
