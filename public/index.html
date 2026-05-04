@@ -331,6 +331,15 @@ async function fetchLiveData() {
         
         // Update Nations State
         for (const [country, count] of Object.entries(newData.nations)) {
+            if (count <= 0) {
+                if (nationCounts[country] !== undefined) {
+                    const pathId = `#nation-${country.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                    d3.select(pathId).style("fill", getColor(0));
+                    delete nationCounts[country];
+                    dataChanged = true;
+                }
+                continue;
+            }
             if (nationCounts[country] !== count) {
                 nationCounts[country] = count;
                 dataChanged = true;
@@ -351,25 +360,31 @@ async function fetchLiveData() {
         
         // Find removed values
         for (const country of Object.keys(nationCounts)) {
-            if (newData.nations[country] === undefined) {
-                nationCounts[country] = 0;
-                dataChanged = true;
+            if (newData.nations[country] === undefined || newData.nations[country] <= 0) {
                 const pathId = `#nation-${country.replace(/[^a-zA-Z0-9]/g, '-')}`;
                 const el = d3.select(pathId);
                 if (!el.empty()) el.style("fill", getColor(0));
                 delete nationCounts[country];
+                dataChanged = true;
             }
         }
 
         // Update Continents State
         for (const [continent, count] of Object.entries(newData.continents)) {
+            if (count <= 0) {
+                if (continentCounts[continent] !== undefined) {
+                    delete continentCounts[continent];
+                    dataChanged = true;
+                }
+                continue;
+            }
             if (continentCounts[continent] !== count) {
                 continentCounts[continent] = count;
                 dataChanged = true;
             }
         }
         for (const continent of Object.keys(continentCounts)) {
-            if (newData.continents[continent] === undefined) {
+            if (newData.continents[continent] === undefined || newData.continents[continent] <= 0) {
                 delete continentCounts[continent];
                 dataChanged = true;
             }
@@ -390,14 +405,17 @@ function updateLeaderboard(){
     panel.html("");
 
     const targetCounts = viewMode === 'continents' ? continentCounts : nationCounts;
-    const totalClicks = Object.values(targetCounts).reduce((a,b)=>a+b, 0);
+    
+    // Filter out 0s
+    const filteredEntries = Object.entries(targetCounts).filter(([n,c]) => c > 0);
+    const totalClicks = filteredEntries.reduce((a,b)=>a+b[1], 0);
 
-    const sorted = Object.entries(targetCounts).sort((a,b)=>b[1]-a[1]);
+    const sorted = filteredEntries.sort((a,b)=>b[1]-a[1]);
     
     if (sorted.length === 0) {
         panel.append("div")
-            .attr("style", "text-align: center; color: #64748b; font-size: 0.8rem; margin-top: 20px;")
-            .html(`No ${viewMode} claimed yet!`);
+            .attr("style", "text-align: center; color: #94a3b8; font-size: 0.95rem; margin-top: 30px;")
+            .html(`Nobody has claimed any ${viewMode} yet! <br><br><span style="font-size: 2rem;">😢</span><br><br>Use <b>/claim [country]</b> in Discord to start the map!`);
     } else {
         sorted.forEach(([n,c],i)=>{
             panel.append("div")
@@ -406,7 +424,7 @@ function updateLeaderboard(){
         });
     }
 
-    d3.select("#stats").text(`Total Members Claimed: ` + Object.values(nationCounts).reduce((a,b)=>a+b, 0));
+    d3.select("#stats").text(`Total Members Claimed: ` + totalClicks);
 }
 </script>
 
