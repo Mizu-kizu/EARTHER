@@ -288,16 +288,20 @@ const tooltip = d3.select("#tooltip");
 let nationCounts = {};
 let continentCounts = {};
 let mapFeatures = null;
+let countryData = {};
 
-// LOAD MAP ONCE
-d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
-.then(data => {
-  mapFeatures = data.features;
-  renderInitialMap();
-  
-  // Start polling the bot server!
-  fetchLiveData();
-  setInterval(fetchLiveData, 5000); // Check every 5 seconds
+// LOAD MAP AND COUNTRIES ONCE
+Promise.all([
+    d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
+    d3.json("/countries.json")
+]).then(([mapData, countriesJson]) => {
+    mapFeatures = mapData.features;
+    countryData = countriesJson;
+    renderInitialMap();
+    
+    // Start polling the bot server!
+    fetchLiveData();
+    setInterval(fetchLiveData, 5000); // Check every 5 seconds
 });
 
 function renderInitialMap() {
@@ -311,9 +315,18 @@ function renderInitialMap() {
 
     // HOVER (mouse)
     .on("mousemove", (e,d)=>{
-      const c = nationCounts[d.properties.name] || 0;
+      let label = "";
+      if (viewMode === 'continents') {
+          const continent = countryData[d.properties.name]?.continent || "Unknown Continent";
+          const c = continentCounts[continent] || 0;
+          label = `${continent} (${c} Members)`;
+      } else {
+          const c = nationCounts[d.properties.name] || 0;
+          label = `${d.properties.name} (${c} Members)`;
+      }
+      
       tooltip.style("opacity",1)
-        .html(`${d.properties.name} (${c} Members)`)
+        .html(label)
         .style("left",(e.pageX+10)+"px")
         .style("top",(e.pageY-20)+"px");
     })
@@ -343,10 +356,9 @@ async function fetchLiveData() {
             
             if (count <= 0) {
                 if (nationCounts[country] !== undefined) {
-                    const pathId = `#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`;
-                    d3.select(pathId).style("fill", getColor(0));
                     delete nationCounts[country];
                     dataChanged = true;
+                    if (viewMode === 'nations') d3.select(`#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`).style("fill", getColor(0));
                 }
                 continue;
             }
@@ -354,29 +366,22 @@ async function fetchLiveData() {
                 nationCounts[country] = count;
                 dataChanged = true;
                 
-                // Animate map color
-                const pathId = `#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`;
-                const el = d3.select(pathId);
-                if (!el.empty()) {
-                    el.style("fill", getColor(count));
-                    el.node().animate([
-                        { filter: 'brightness(1)' },
-                        { filter: 'brightness(1.5)' },
-                        { filter: 'brightness(1)' }
-                    ], { duration: 500, easing: 'ease-out' });
+                if (viewMode === 'nations') {
+                    const el = d3.select(`#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`);
+                    if (!el.empty()) {
+                        el.style("fill", getColor(count));
+                        el.node().animate([{ filter: 'brightness(1)' }, { filter: 'brightness(1.5)' }, { filter: 'brightness(1)' }], { duration: 500 });
+                    }
                 }
             }
         }
         
-        // Find removed values
         for (const country of Object.keys(nationCounts)) {
             const mapCountry = mapAlias[country] || country;
             if (newData.nations[country] === undefined || newData.nations[country] <= 0) {
-                const pathId = `#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`;
-                const el = d3.select(pathId);
-                if (!el.empty()) el.style("fill", getColor(0));
                 delete nationCounts[country];
                 dataChanged = true;
+                if (viewMode === 'nations') d3.select(`#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`).style("fill", getColor(0));
             }
         }
 
@@ -392,12 +397,31 @@ async function fetchLiveData() {
             if (continentCounts[continent] !== count) {
                 continentCounts[continent] = count;
                 dataChanged = true;
+                
+                if (viewMode === 'continents') {
+                    // Color all paths belonging to this continent
+                    const countriesInContinent = Object.keys(countryData).filter(c => countryData[c].continent === continent);
+                    countriesInContinent.forEach(c => {
+                        const mapCountry = mapAlias[c] || c;
+                        const el = d3.select(`#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`);
+                        if (!el.empty()) {
+                            el.style("fill", getColor(count));
+                        }
+                    });
+                }
             }
         }
         for (const continent of Object.keys(continentCounts)) {
             if (newData.continents[continent] === undefined || newData.continents[continent] <= 0) {
                 delete continentCounts[continent];
                 dataChanged = true;
+                if (viewMode === 'continents') {
+                    const countriesInContinent = Object.keys(countryData).filter(c => countryData[c].continent === continent);
+                    countriesInContinent.forEach(c => {
+                        const mapCountry = mapAlias[c] || c;
+                        d3.select(`#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`).style("fill", getColor(0));
+                    });
+                }
             }
         }
         

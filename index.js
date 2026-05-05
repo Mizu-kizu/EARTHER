@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 
 // --- LOAD COUNTRIES DICTIONARY ---
-const countriesData = JSON.parse(fs.readFileSync(path.join(__dirname, 'countries.json'), 'utf8'));
+const countriesData = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 'countries.json'), 'utf8'));
 
 // Helper function to resolve country gracefully
 function resolveCountry(inputName) {
