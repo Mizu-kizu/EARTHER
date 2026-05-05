@@ -11,7 +11,23 @@ const countriesData = JSON.parse(fs.readFileSync(path.join(__dirname, 'public', 
 // Helper function to resolve country gracefully
 function resolveCountry(inputName) {
     // Normalize input
-    const normalizedInput = inputName.trim().toLowerCase();
+    let normalizedInput = inputName.trim().toLowerCase();
+    
+    // Common aliases mapping
+    const inputAliases = {
+        'america': 'usa',
+        'united states of america': 'usa',
+        'united states': 'usa',
+        'us': 'usa',
+        'uk': 'united kingdom',
+        'britain': 'united kingdom',
+        'great britain': 'united kingdom',
+        'uae': 'united arab emirates'
+    };
+    
+    if (inputAliases[normalizedInput]) {
+        normalizedInput = inputAliases[normalizedInput];
+    }
     
     // Find exact match case-insensitive
     const exactMatch = Object.keys(countriesData).find(c => c.toLowerCase() === normalizedInput);

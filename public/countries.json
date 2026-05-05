@@ -1,10 +1,4 @@
 {
-  "United States": {
-    "demonym": "American",
-    "continent": "North America",
-    "fact": "The land of the free, Hollywood, and endless road trips.",
-    "color": "#ba737e"
-  },
   "Canada": {
     "demonym": "Canadian",
     "continent": "North America",
@@ -1546,5 +1540,11 @@
     "continent": "Africa",
     "fact": "A wonderful place in Africa!",
     "color": "#e5a34d"
+  },
+  "USA": {
+    "demonym": "American",
+    "continent": "North America",
+    "fact": "The land of the free, Hollywood, and endless road trips.",
+    "color": "#ba737e"
   }
 }
