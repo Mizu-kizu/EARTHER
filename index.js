@@ -82,18 +82,24 @@ app.get('/api/counts', async (req, res) => {
             
             // Loop through roles
             guild.roles.cache.forEach(role => {
+                const roleNameLower = role.name.toLowerCase();
+                
                 // If it's a continent role
-                if (['North America', 'South America', 'Europe', 'Asia', 'Africa', 'Oceania', 'Antarctica', 'Unknown Continent'].includes(role.name)) {
-                    continentCounts[role.name] = (continentCounts[role.name] || 0) + role.members.size;
+                const continentsLower = ['north america', 'south america', 'europe', 'asia', 'africa', 'oceania', 'antarctica', 'unknown continent'];
+                if (continentsLower.includes(roleNameLower)) {
+                    // Find the properly capitalized continent name
+                    const correctContinent = ['North America', 'South America', 'Europe', 'Asia', 'Africa', 'Oceania', 'Antarctica', 'Unknown Continent']
+                        .find(c => c.toLowerCase() === roleNameLower);
+                    continentCounts[correctContinent] = (continentCounts[correctContinent] || 0) + role.members.size;
                 }
                 
                 // If it's a demonym role
-                const countryEntry = Object.entries(countriesData).find(([_, data]) => data.demonym === role.name);
+                const countryEntry = Object.entries(countriesData).find(([_, data]) => data.demonym.toLowerCase() === roleNameLower);
                 if (countryEntry) {
                     nationCounts[countryEntry[0]] = (nationCounts[countryEntry[0]] || 0) + role.members.size;
-                } else if (role.name.endsWith(" Citizen")) {
+                } else if (roleNameLower.endsWith(" citizen")) {
                     // Fallback demonym
-                    const countryName = role.name.replace(" Citizen", "");
+                    const countryName = role.name.substring(0, role.name.length - 8); // Remove " Citizen"
                     nationCounts[countryName] = (nationCounts[countryName] || 0) + role.members.size;
                 }
             });
@@ -107,6 +113,17 @@ app.get('/api/counts', async (req, res) => {
 
 client.once('ready', async () => {
     console.log(`Bot logged in as ${client.user.tag}!`);
+    
+    // Fetch all members on startup to ensure accurate role counts
+    console.log('Fetching members to populate cache...');
+    for (const guild of client.guilds.cache.values()) {
+        try {
+            await guild.members.fetch();
+            console.log(`Cached members for ${guild.name}`);
+        } catch (err) {
+            console.error(`Failed to fetch members for ${guild.name}:`, err);
+        }
+    }
     
     // Register slash commands
     const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
