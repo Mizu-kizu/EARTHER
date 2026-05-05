@@ -17,14 +17,8 @@ function resolveCountry(inputName) {
     const exactMatch = Object.keys(countriesData).find(c => c.toLowerCase() === normalizedInput);
     if (exactMatch) return { name: exactMatch, ...countriesData[exactMatch] };
 
-    // Fallback logic
-    const fallbackName = inputName.charAt(0).toUpperCase() + inputName.slice(1).toLowerCase();
-    return {
-        name: fallbackName,
-        demonym: fallbackName + " Citizen",
-        continent: "Unknown Continent",
-        fact: "A wonderful place on Earth!"
-    };
+    // Reject invalid countries
+    return null;
 }
 
 // --- EXPRESS SERVER SETUP ---
@@ -177,6 +171,10 @@ client.on('interactionCreate', async interaction => {
 
             const inputCountry = interaction.options.getString('country');
             const countryInfo = resolveCountry(inputCountry);
+
+            if (!countryInfo) {
+                return interaction.editReply(`❌ **${inputCountry}** is not a valid country! Please spell it correctly (e.g. Canada, Brazil, Japan).`);
+            }
 
             try {
                 // 1. Manage Continent Role

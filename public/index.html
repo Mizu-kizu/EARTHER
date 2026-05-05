@@ -329,11 +329,21 @@ async function fetchLiveData() {
         
         let dataChanged = false;
         
+        // Aliases for countries not explicitly in the GeoJSON
+        const mapAlias = {
+            "Scotland": "England",
+            "Wales": "England",
+            "Northern Ireland": "England",
+            "United Kingdom": "England"
+        };
+        
         // Update Nations State
         for (const [country, count] of Object.entries(newData.nations)) {
+            const mapCountry = mapAlias[country] || country;
+            
             if (count <= 0) {
                 if (nationCounts[country] !== undefined) {
-                    const pathId = `#nation-${country.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                    const pathId = `#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`;
                     d3.select(pathId).style("fill", getColor(0));
                     delete nationCounts[country];
                     dataChanged = true;
@@ -345,7 +355,7 @@ async function fetchLiveData() {
                 dataChanged = true;
                 
                 // Animate map color
-                const pathId = `#nation-${country.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                const pathId = `#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`;
                 const el = d3.select(pathId);
                 if (!el.empty()) {
                     el.style("fill", getColor(count));
@@ -360,8 +370,9 @@ async function fetchLiveData() {
         
         // Find removed values
         for (const country of Object.keys(nationCounts)) {
+            const mapCountry = mapAlias[country] || country;
             if (newData.nations[country] === undefined || newData.nations[country] <= 0) {
-                const pathId = `#nation-${country.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                const pathId = `#nation-${mapCountry.replace(/[^a-zA-Z0-9]/g, '-')}`;
                 const el = d3.select(pathId);
                 if (!el.empty()) el.style("fill", getColor(0));
                 delete nationCounts[country];
