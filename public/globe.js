@@ -95,10 +95,10 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping      = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.1;
+renderer.toneMappingExposure = 1.4; // Boosted for better NASA texture pop
 
 const scene  = new THREE.Scene();
-scene.background = new THREE.Color(0x020817);
+scene.background = new THREE.Color(0x010409); // Slightly deeper cosmic black
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 0.8, CAM_DISTANCE);
@@ -133,17 +133,24 @@ if (!controls) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Lighting — tuned for NASA topo+bathy texture
+// Lighting — Cinematic Sun & Atmosphere
 // ─────────────────────────────────────────────────────────────────────────────
-scene.add(new THREE.AmbientLight(0x334466, 2.5));  // enough to see night side detail
+scene.add(new THREE.AmbientLight(0xffffff, 0.6)); // Balanced fill
 
-const sun = new THREE.DirectionalLight(0xfff5e0, 2.8);
-sun.position.set(6, 3, 5);
+// The Sun — bright and focused
+const sun = new THREE.DirectionalLight(0xffffff, 4.0);
+sun.position.set(5, 3, 5);
 scene.add(sun);
 
-const rim = new THREE.DirectionalLight(0x2255aa, 0.5);
-rim.position.set(-6, -3, -4);
+// Blue rim light for atmosphere depth
+const rim = new THREE.PointLight(0x44aaff, 2.0, 30);
+rim.position.set(-6, 2, -6);
 scene.add(rim);
+
+// Backlight to prevent "total black" on the dark side
+const backLight = new THREE.DirectionalLight(0x112244, 0.8);
+backLight.position.set(-5, -2, -5);
+scene.add(backLight);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Stars
@@ -175,14 +182,14 @@ topoTex.colorSpace = THREE.SRGBColorSpace;
 
 const earthMesh = new THREE.Mesh(
   new THREE.SphereGeometry(GLOBE_R, 128, 128),
-  new THREE.MeshPhongMaterial({
-    color:       0x888888,         // Base color for better visibility if texture is slow
+  new THREE.MeshStandardMaterial({
     map:         topoTex,
     normalMap:   normalTex,
-    normalScale: new THREE.Vector2(1.2, 1.2),
-    specularMap: specTex,
-    specular:    new THREE.Color(0x222222),
-    shininess:   15,
+    normalScale: new THREE.Vector2(0.5, 0.5), // Lowered for subtler terrain
+    roughness:   0.8,
+    metalness:   0.05,
+    emissive:    new THREE.Color(0x111111), 
+    emissiveIntensity: 0.1
   })
 );
 scene.add(earthMesh);
@@ -269,7 +276,7 @@ function lonLatToCanvas(lon, lat) {
 }
 
 function extractPolygons(feature) {
-  const name   = feature.properties.name;
+  const name   = feature.properties.NAME || feature.properties.name || feature.properties.ADMIN;
   const rings  = [];
   const polys  = feature.geometry.type === 'Polygon'
     ? [feature.geometry.coordinates]
@@ -366,9 +373,9 @@ function buildBorderLines(feature) {
 }
 
 const borderMat = new THREE.LineBasicMaterial({
-  color: 0x2a5080,
+  color: 0x4488ff,
   transparent: true,
-  opacity: 0.9,
+  opacity: 0.8,
   depthWrite: false,
 });
 
@@ -441,26 +448,31 @@ async function init() {
 
   for (let i = 0; i < features.length; i++) {
     const feature = features[i];
-    const name = feature.properties.name;
+    const name = feature.properties.NAME || feature.properties.name || feature.properties.ADMIN;
     if (!name) continue;
     allCountryNames.push(name);
 
     // Extract polygon data for canvas painting
     extractPolygons(feature);
-    countryColors[name] = '#0e1f3a';  // default unclaimed color
+    countryColors[name] = '#0e1f3a';
 
-    // Build invisible ghost sphere for raycasting hover detection
+    // Calculate Bounding Box for fast raycasting
+    const bbox = { minLon: 180, maxLon: -180, minLat: 90, maxLat: -90 };
+    const polys = feature.geometry.type === 'Polygon' ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+    for (const poly of polys) {
+      for (const ring of poly) {
+        for (const [lon, lat] of ring) {
+          bbox.minLon = Math.min(bbox.minLon, lon);
+          bbox.maxLon = Math.max(bbox.maxLon, lon);
+          bbox.minLat = Math.min(bbox.minLat, lat);
+          bbox.maxLat = Math.max(bbox.maxLat, lat);
+        }
+      }
+    }
+
     const centroid = featureCentroid(feature);
     const area     = polygonApproxArea(feature);
-    const ghostR   = Math.max(0.1, Math.sqrt(area) * 0.08); // Larger spheres for better click detection
-    const ghost    = new THREE.Mesh(
-      new THREE.SphereGeometry(ghostR, 8, 8),
-      new THREE.MeshBasicMaterial({ visible: false })
-    );
-    if (centroid) ghost.position.copy(latLonToVec3(centroid.lat, centroid.lon, GLOBE_R));
-    ghost.userData = { name };
-    globeGroup.add(ghost);
-
+    
     let marker = null;
     if (centroid && area < MICRO_THRESHOLD) {
       marker = buildMarker(centroid.lat, centroid.lon, 0x334155);
@@ -468,7 +480,14 @@ async function init() {
       marker.userData = { name };
       globeGroup.add(marker);
     }
-    countryMeshes.push({ mesh: ghost, name, centroid, marker });
+
+    countryMeshes.push({ 
+      name, 
+      centroid, 
+      marker, 
+      geometry: feature.geometry,
+      bbox 
+    });
 
     if (i % BATCH === 0) await yieldFrame();
   }
@@ -543,44 +562,76 @@ function clearHover() {
   tooltip.classList.remove('show');
 }
 
+function pointInPolygon(point, vs) {
+  const x = point[0], y = point[1];
+  let inside = false;
+  for (let i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+    const xi = vs[i][0], yi = vs[i][1];
+    const xj = vs[j][0], yj = vs[j][1];
+    const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+    if (intersect) inside = !inside;
+  }
+  return inside;
+}
+
+function isPointInCountry(lon, lat, country) {
+  const { geometry, bbox } = country;
+  // BBox check first (performance)
+  if (lon < bbox.minLon || lon > bbox.maxLon || lat < bbox.minLat || lat > bbox.maxLat) return false;
+
+  const polys = geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates;
+  for (const poly of polys) {
+    // Check outer ring
+    if (pointInPolygon([lon, lat], poly[0])) {
+      // Check holes (inner rings)
+      let inHole = false;
+      for (let i = 1; i < poly.length; i++) {
+        if (pointInPolygon([lon, lat], poly[i])) { inHole = true; break; }
+      }
+      if (!inHole) return true;
+    }
+  }
+  return false;
+}
+
 function doRaycast() {
   raycaster.setFromCamera(mouse, camera);
-  // Raycast against the earth sphere to get any hover, then find which country
   const sphereHit = raycaster.intersectObject(earthMesh);
-  const ghostHits = raycaster.intersectObjects(countryMeshes.map(e => e.mesh));
 
-  const hits = ghostHits.length > 0 ? ghostHits : [];
+  if (sphereHit.length > 0) {
+    const hit = sphereHit[0];
+    const uv  = hit.uv;
+    // Convert UV back to Lat/Lon
+    const lon = (uv.x * 360) - 180;
+    const lat = (uv.y * 180) - 90;
 
-  if (hits.length > 0) {
-    const hit   = hits[0].object;
-    const entry = countryMeshes.find(e => e.mesh === hit);
-    if (!entry) return;
+    // Find country by point-in-polygon
+    const entry = countryMeshes.find(e => isPointInCountry(lon, lat, e));
 
-    if (hoveredEntry !== entry) {
-      clearHover();
-      hoveredEntry = entry;
-      // Highlight on canvas
-      if (!entry.isCustom) {
-        const base = countryColors[entry.name] || '#0e1f3a';
-        const bright = brightenHex(base);
-        countryColors[entry.name] = bright;
-        paintAllCountries();
-        countryColors[entry.name] = base;  // reset will happen on clearHover
+    if (entry) {
+      if (hoveredEntry !== entry) {
+        clearHover();
+        hoveredEntry = entry;
+        if (!entry.isCustom) {
+          const base = countryColors[entry.name] || '#0e1f3a';
+          countryColors[entry.name] = brightenHex(base);
+          paintAllCountries();
+          countryColors[entry.name] = base;
+        }
       }
+      const count = nationCounts[entry.name] || 0;
+      ttName.textContent = entry.name;
+      ttInfo.textContent = count > 0 ? `${count} member${count !== 1 ? 's' : ''} claimed` : 'Unclaimed';
+      tooltip.classList.add('show');
+      return;
     }
-
-    const count = nationCounts[entry.name] || 0;
-    ttName.textContent = entry.name;
-    ttInfo.textContent = count > 0 ? `${count} member${count !== 1 ? 's' : ''} claimed` : 'Unclaimed';
-    tooltip.classList.add('show');
-  } else {
-    if (hoveredEntry) {
-      // Restore color on canvas
-      const name = hoveredEntry.name;
-      if (countryColors[name]) paintAllCountries();
-    }
-    clearHover();
   }
+
+  // Restore color on canvas if we were hovering
+  if (hoveredEntry && !hoveredEntry.isCustom) {
+    paintAllCountries();
+  }
+  clearHover();
 }
 
 // ─── Passport Card UI ────────────────────────────────────────────────────────
