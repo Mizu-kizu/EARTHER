@@ -358,7 +358,7 @@ client.on('interactionCreate', async interaction => {
 async function sendInteractiveMap(interaction, view, isUpdate = false) {
     let browser;
     try {
-        browser = await puppeteer.launch({ 
+        const launchOptions = { 
             headless: 'new',
             args: [
                 '--no-sandbox',
@@ -368,7 +368,12 @@ async function sendInteractiveMap(interaction, view, isUpdate = false) {
                 '--disable-web-security',
                 '--use-gl=swiftshader',   // Software WebGL for headless
             ] 
-        });
+        };
+        // On Render (Docker), use the pre-installed Chrome from the image
+        if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+            launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+        }
+        browser = await puppeteer.launch(launchOptions);
         const page = await browser.newPage();
         // Set high res
         await page.setViewport({ width: 1200, height: 800, deviceScaleFactor: 2 });
