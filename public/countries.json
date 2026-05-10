@@ -1,0 +1,1650 @@
+{
+  "Canada": {
+    "demonym": "Canadian",
+    "continent": "North America",
+    "flag": "🇨🇦",
+    "capital": "Ottawa",
+    "pop": "40 million",
+    "lang": "English, French",
+    "currency": "Dollar $",
+    "fact": "Canada has more lakes than the rest of the world's lakes combined!",
+    "color": "#b642d9"
+  },
+  "Mexico": {
+    "demonym": "Mexican",
+    "continent": "North America",
+    "flag": "🇲🇽",
+    "capital": "Mexico City",
+    "pop": "128 million",
+    "lang": "Spanish",
+    "currency": "Peso $",
+    "fact": "Mexico City is built on the ruins of the Aztec capital, Tenochtitlan.",
+    "color": "#3df10a"
+  },
+  "Brazil": {
+    "demonym": "Brazilian",
+    "continent": "South America",
+    "flag": "🇧🇷",
+    "capital": "Brasília",
+    "pop": "215 million",
+    "lang": "Portuguese",
+    "currency": "Real R$",
+    "fact": "Brazil's Amazon rainforest produces 20% of the world's oxygen.",
+    "color": "#27ca69"
+  },
+  "Argentina": {
+    "demonym": "Argentine",
+    "continent": "South America",
+    "flag": "🇦🇷",
+    "capital": "Buenos Aires",
+    "pop": "46 million",
+    "lang": "Spanish",
+    "currency": "Peso $",
+    "fact": "Argentina is the birthplace of the tango and home to incredible glaciers.",
+    "color": "#bbddfc"
+  },
+  "Chile": {
+    "demonym": "Chilean",
+    "continent": "South America",
+    "fact": "The land of the towering Andes and the vast Atacama Desert.",
+    "color": "#41c385"
+  },
+  "Colombia": {
+    "demonym": "Colombian",
+    "continent": "South America",
+    "fact": "The land of incredible coffee, emeralds, and rhythmic cumbia.",
+    "color": "#c464ff"
+  },
+  "United Kingdom": {
+    "demonym": "British",
+    "continent": "Europe",
+    "flag": "🇬🇧",
+    "capital": "London",
+    "pop": "67 million",
+    "lang": "English",
+    "currency": "Pound £",
+    "fact": "The UK invented the World Wide Web, the telephone, and the steam engine.",
+    "color": "#bb41b3"
+  },
+  "France": {
+    "demonym": "French",
+    "continent": "Europe",
+    "flag": "🇫🇷",
+    "capital": "Paris",
+    "pop": "68 million",
+    "lang": "French",
+    "currency": "Euro €",
+    "fact": "France is the most visited country in the world, with 90 million tourists a year.",
+    "color": "#3200a4"
+  },
+  "Germany": {
+    "demonym": "German",
+    "continent": "Europe",
+    "flag": "🇩🇪",
+    "capital": "Berlin",
+    "pop": "84 million",
+    "lang": "German",
+    "currency": "Euro €",
+    "fact": "Germany has over 1,500 different types of beer and 1,300 breweries.",
+    "color": "#af22cd"
+  },
+  "Italy": {
+    "demonym": "Italian",
+    "continent": "Europe",
+    "flag": "🇮🇹",
+    "capital": "Rome",
+    "pop": "59 million",
+    "lang": "Italian",
+    "currency": "Euro €",
+    "fact": "Italy has more UNESCO World Heritage sites than any other country.",
+    "color": "#553e13"
+  },
+  "Spain": {
+    "demonym": "Spanish",
+    "continent": "Europe",
+    "flag": "🇪🇸",
+    "capital": "Madrid",
+    "pop": "47 million",
+    "lang": "Spanish",
+    "currency": "Euro €",
+    "fact": "Spain produces over 40% of the world's olive oil.",
+    "color": "#a17bfe"
+  },
+  "Sweden": {
+    "demonym": "Swedish",
+    "continent": "Europe",
+    "fact": "The land of the midnight sun, epic vikings, and beautiful archipelagos.",
+    "color": "#c3ce09"
+  },
+  "Norway": {
+    "demonym": "Norwegian",
+    "continent": "Europe",
+    "fact": "The land of breathtaking fjords and the spectacular Northern Lights.",
+    "color": "#fd962a"
+  },
+  "Denmark": {
+    "demonym": "Danish",
+    "continent": "Europe",
+    "fact": "The land of hygge, historic Vikings, and The Little Mermaid.",
+    "color": "#0e9d18"
+  },
+  "Finland": {
+    "demonym": "Finnish",
+    "continent": "Europe",
+    "fact": "The land of a thousand lakes and the true home of Santa Claus.",
+    "color": "#7714d6"
+  },
+  "Ireland": {
+    "demonym": "Irish",
+    "continent": "Europe",
+    "fact": "The Emerald Isle, known for its folklore, green hills, and pubs.",
+    "color": "#3955fe"
+  },
+  "Russia": {
+    "demonym": "Russian",
+    "continent": "Europe",
+    "flag": "🇷🇺",
+    "capital": "Moscow",
+    "pop": "144 million",
+    "lang": "Russian",
+    "currency": "Ruble ₽",
+    "fact": "Russia has the world's longest railway, the Trans-Siberian, which crosses 8 time zones.",
+    "color": "#6f3107"
+  },
+  "China": {
+    "demonym": "Chinese",
+    "continent": "Asia",
+    "flag": "🇨🇳",
+    "capital": "Beijing",
+    "pop": "1.41 billion",
+    "lang": "Mandarin",
+    "currency": "Yuan ¥",
+    "fact": "China built the Great Wall over 2,000 years — it's longer than the distance from NYC to LA.",
+    "color": "#9221cc"
+  },
+  "Japan": {
+    "demonym": "Japanese",
+    "continent": "Asia",
+    "flag": "🇯🇵",
+    "capital": "Tokyo",
+    "pop": "125 million",
+    "lang": "Japanese",
+    "currency": "Yen ¥",
+    "fact": "Japan has the world's oldest company — Kongō Gumi, founded in 578 AD.",
+    "color": "#02d88d"
+  },
+  "India": {
+    "demonym": "Indian",
+    "continent": "Asia",
+    "flag": "🇮🇳",
+    "capital": "New Delhi",
+    "pop": "1.44 billion",
+    "lang": "Hindi, English",
+    "currency": "Rupee ₹",
+    "fact": "India invented chess and is the world's largest democracy.",
+    "color": "#5236fd"
+  },
+  "South Korea": {
+    "demonym": "South Korean",
+    "continent": "Asia",
+    "flag": "🇰🇷",
+    "capital": "Seoul",
+    "pop": "52 million",
+    "lang": "Korean",
+    "currency": "Won ₩",
+    "fact": "South Korea has the world's fastest average internet speed.",
+    "color": "#3a6a02"
+  },
+  "Indonesia": {
+    "demonym": "Indonesian",
+    "continent": "Asia",
+    "fact": "The land of thousands of volcanic islands, Bali, and Komodo dragons.",
+    "color": "#513c38"
+  },
+  "Vietnam": {
+    "demonym": "Vietnamese",
+    "continent": "Asia",
+    "fact": "The land of stunning bays, rich history, and incredible pho.",
+    "color": "#970767"
+  },
+  "Thailand": {
+    "demonym": "Thai",
+    "continent": "Asia",
+    "fact": "The Land of Smiles, famous for its temples, beaches, and street food.",
+    "color": "#567ce6"
+  },
+  "Australia": {
+    "demonym": "Australian",
+    "continent": "Oceania",
+    "flag": "🇦🇺",
+    "capital": "Canberra",
+    "pop": "26 million",
+    "lang": "English",
+    "currency": "Dollar $",
+    "fact": "Over 80% of Australia's plants and animals are unique to the continent.",
+    "color": "#3a56d3"
+  },
+  "New Zealand": {
+    "demonym": "New Zealander",
+    "continent": "Oceania",
+    "fact": "The land of the long white cloud, stunning landscapes, and hobbits!",
+    "color": "#979ac3"
+  },
+  "South Africa": {
+    "demonym": "South African",
+    "continent": "Africa",
+    "fact": "The land of incredible wildlife safaris and the Cape of Good Hope.",
+    "color": "#f21f9b"
+  },
+  "Egypt": {
+    "demonym": "Egyptian",
+    "continent": "Africa",
+    "fact": "The land of the pharaohs, the Great Pyramids, and the mighty Nile.",
+    "color": "#085968"
+  },
+  "Nigeria": {
+    "demonym": "Nigerian",
+    "continent": "Africa",
+    "fact": "The giant of Africa, known for Nollywood and vibrant culture.",
+    "color": "#f4f829"
+  },
+  "Kenya": {
+    "demonym": "Kenyan",
+    "continent": "Africa",
+    "fact": "The land of the great Maasai Mara migration and world-class runners.",
+    "color": "#7ed9b4"
+  },
+  "Morocco": {
+    "demonym": "Moroccan",
+    "continent": "Africa",
+    "fact": "The land of vibrant souks, the Sahara Desert, and intricate architecture.",
+    "color": "#703103"
+  },
+  "Greece": {
+    "demonym": "Greek",
+    "continent": "Europe",
+    "fact": "The birthplace of democracy, ancient mythology, and beautiful islands.",
+    "color": "#cbdc66"
+  },
+  "Turkey": {
+    "demonym": "Turkish",
+    "continent": "Asia",
+    "fact": "The bridge between Europe and Asia, home to ancient empires.",
+    "color": "#a22c93"
+  },
+  "Saudi Arabia": {
+    "demonym": "Saudi",
+    "continent": "Asia",
+    "flag": "🇸🇦",
+    "capital": "Riyadh",
+    "pop": "36 million",
+    "lang": "Arabic",
+    "currency": "Riyal ﷼",
+    "fact": "Saudi Arabia is the largest country in the world without a single permanent river.",
+    "color": "#73a3b3"
+  },
+  "United Arab Emirates": {
+    "demonym": "Emirati",
+    "continent": "Asia",
+    "flag": "🇦🇪",
+    "capital": "Abu Dhabi",
+    "pop": "10 million",
+    "lang": "Arabic",
+    "currency": "Dirham د.إ",
+    "fact": "The UAE is home to the world's tallest building, the Burj Khalifa.",
+    "color": "#1bd457"
+  },
+  "Israel": {
+    "demonym": "Israeli",
+    "continent": "Asia",
+    "fact": "The historic land of incredible ancient sites and modern innovation.",
+    "color": "#74c615"
+  },
+  "Portugal": {
+    "demonym": "Portuguese",
+    "continent": "Europe",
+    "fact": "The land of brave explorers, beautiful coastlines, and delicious pastries.",
+    "color": "#5dd624"
+  },
+  "Netherlands": {
+    "demonym": "Dutch",
+    "continent": "Europe",
+    "fact": "The land of windmills, tulips, and incredible cycling cities.",
+    "color": "#832a80"
+  },
+  "Belgium": {
+    "demonym": "Belgian",
+    "continent": "Europe",
+    "fact": "The land of world-class chocolate, waffles, and medieval towns.",
+    "color": "#f38ab3"
+  },
+  "Switzerland": {
+    "demonym": "Swiss",
+    "continent": "Europe",
+    "fact": "The land of the majestic Alps, precision watches, and delicious cheese.",
+    "color": "#1aa6da"
+  },
+  "Austria": {
+    "demonym": "Austrian",
+    "continent": "Europe",
+    "fact": "The land of classical music, grand palaces, and stunning mountains.",
+    "color": "#42142f"
+  },
+  "Poland": {
+    "demonym": "Polish",
+    "continent": "Europe",
+    "fact": "The land of rich history, hearty pierogi, and beautiful old towns.",
+    "color": "#45b84b"
+  },
+  "Pakistan": {
+    "demonym": "Pakistani",
+    "continent": "Asia",
+    "flag": "🇵🇰",
+    "capital": "Islamabad",
+    "pop": "235 million",
+    "lang": "Urdu, English",
+    "currency": "Rupee ₨",
+    "fact": "Pakistan is home to K2, the second highest mountain in the world.",
+    "color": "#aa2a22"
+  },
+  "Bangladesh": {
+    "demonym": "Bangladeshi",
+    "continent": "Asia",
+    "fact": "The land of the world's largest mangrove forest and vibrant rivers.",
+    "color": "#c85aa9"
+  },
+  "Philippines": {
+    "demonym": "Filipino",
+    "continent": "Asia",
+    "fact": "The land of over 7,000 islands, pristine beaches, and warm smiles.",
+    "color": "#8d961b"
+  },
+  "Malaysia": {
+    "demonym": "Malaysian",
+    "continent": "Asia",
+    "fact": "The land of the Petronas Towers and incredible rainforests.",
+    "color": "#7a8394"
+  },
+  "Singapore": {
+    "demonym": "Singaporean",
+    "continent": "Asia",
+    "flag": "🇸🇬",
+    "capital": "Singapore",
+    "pop": "6 million",
+    "lang": "English, Mandarin, Malay, Tamil",
+    "currency": "Dollar $",
+    "fact": "Singapore is one of only three city-states in the world.",
+    "color": "#7e342e"
+  },
+  "Scotland": {
+    "demonym": "Scottish",
+    "continent": "Europe",
+    "fact": "The land of bagpipes, kilts, and the Loch Ness Monster.",
+    "color": "#1f6cb0"
+  },
+  "England": {
+    "demonym": "English",
+    "continent": "Europe",
+    "fact": "The land of Shakespeare, red buses, and the Royal Family.",
+    "color": "#cf1f2e"
+  },
+  "Wales": {
+    "demonym": "Welsh",
+    "continent": "Europe",
+    "fact": "The land of dragons, castles, and incredible singing.",
+    "color": "#1f8745"
+  },
+  "Northern Ireland": {
+    "demonym": "Northern Irish",
+    "continent": "Europe",
+    "fact": "The land of the Giant's Causeway and Game of Thrones landscapes.",
+    "color": "#8fbf24"
+  },
+  "Puerto Rico": {
+    "demonym": "Puerto Rican",
+    "continent": "North America",
+    "fact": "The Island of Enchantment, known for bioluminescent bays.",
+    "color": "#1e6cb0"
+  },
+  "Greenland": {
+    "demonym": "Greenlandic",
+    "continent": "North America",
+    "fact": "The world's largest island, mostly covered by ice.",
+    "color": "#9ca3af"
+  },
+  "Taiwan": {
+    "demonym": "Taiwanese",
+    "continent": "Asia",
+    "fact": "The land of bubble tea, night markets, and Taipei 101.",
+    "color": "#123b9e"
+  },
+  "Hong Kong": {
+    "demonym": "Hong Konger",
+    "continent": "Asia",
+    "fact": "A dazzling skyline, delicious dim sum, and Victoria Peak.",
+    "color": "#d91e3b"
+  },
+  "Macau": {
+    "demonym": "Macanese",
+    "continent": "Asia",
+    "fact": "The Las Vegas of Asia with a rich Portuguese heritage.",
+    "color": "#0b8a4f"
+  },
+  "Palestine": {
+    "demonym": "Palestinian",
+    "continent": "Asia",
+    "fact": "The historic land of ancient cities, olive trees, and cultural heritage.",
+    "color": "#289b4f"
+  },
+  "Ascension Island": {
+    "demonym": "Ascension Island Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4d57e5"
+  },
+  "Andorra": {
+    "demonym": "Andorran",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4de58c"
+  },
+  "Afghanistan": {
+    "demonym": "Afghanistan Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#bf4de5"
+  },
+  "Antigua and Barbuda": {
+    "demonym": "Antigua and Barbudan",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#4de569"
+  },
+  "Anguilla": {
+    "demonym": "Anguillan",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e5b34d"
+  },
+  "Albania": {
+    "demonym": "Albanian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e5824d"
+  },
+  "Armenia": {
+    "demonym": "Armenian",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#b34de5"
+  },
+  "Angola": {
+    "demonym": "Angolan",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#5ee54d"
+  },
+  "Antarctica": {
+    "demonym": "Antarctican",
+    "continent": "Antarctica",
+    "fact": "A wonderful place in Antarctica!",
+    "color": "#e5bf4d"
+  },
+  "American Samoa": {
+    "demonym": "American Samoan",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#4de59e"
+  },
+  "Aruba": {
+    "demonym": "Aruban",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#8ce54d"
+  },
+  "Aland": {
+    "demonym": "Aland Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e56e4d"
+  },
+  "Azerbaijan": {
+    "demonym": "Azerbaijan Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e57a4d"
+  },
+  "Bosnia and Herzegovina": {
+    "demonym": "Bosnia and Herzegovinan",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#a34de5"
+  },
+  "Barbados": {
+    "demonym": "Barbados Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#b04de5"
+  },
+  "Burkina Faso": {
+    "demonym": "Burkina Faso Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4da6e5"
+  },
+  "Bulgaria": {
+    "demonym": "Bulgarian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e54d96"
+  },
+  "Bahrain": {
+    "demonym": "Bahrain Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#4de5a3"
+  },
+  "Burundi": {
+    "demonym": "Burundi Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4de575"
+  },
+  "Benin": {
+    "demonym": "Benin Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#d6e54d"
+  },
+  "Saint Barthelemy": {
+    "demonym": "Saint Barthelemian",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#694de5"
+  },
+  "Bermuda": {
+    "demonym": "Bermudan",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e5634d"
+  },
+  "Brunei": {
+    "demonym": "Brunei Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#59e54d"
+  },
+  "Bolivia": {
+    "demonym": "Bolivian",
+    "continent": "South America",
+    "fact": "A wonderful place in South America!",
+    "color": "#4db0e5"
+  },
+  "Bonaire": {
+    "demonym": "Bonaire Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e34de5"
+  },
+  "Bahamas": {
+    "demonym": "Bahamas Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#dbe54d"
+  },
+  "Bhutan": {
+    "demonym": "Bhutan Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e54d8a"
+  },
+  "Bouvet Island": {
+    "demonym": "Bouvet Island Citizen",
+    "continent": "Antarctica",
+    "fact": "A wonderful place in Antarctica!",
+    "color": "#e54d75"
+  },
+  "Botswana": {
+    "demonym": "Botswanan",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e54d6e"
+  },
+  "Belarus": {
+    "demonym": "Belarus Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4d9ce5"
+  },
+  "Belize": {
+    "demonym": "Belize Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#594de5"
+  },
+  "Cocos (Keeling) Islands": {
+    "demonym": "Cocos (Keeling) Islands Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e58a4d"
+  },
+  "Democratic Republic of the Congo": {
+    "demonym": "Democratic Republic of the Congo Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#b84de5"
+  },
+  "Central African Republic": {
+    "demonym": "Central African Republic Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#b84de5"
+  },
+  "Republic of the Congo": {
+    "demonym": "Republic of the Congo Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e54dc9"
+  },
+  "Ivory Coast": {
+    "demonym": "Ivory Coast Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4d9ce5"
+  },
+  "Cook Islands": {
+    "demonym": "Cook Islands Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e54d7f"
+  },
+  "Cameroon": {
+    "demonym": "Cameroon Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#a8e54d"
+  },
+  "Costa Rica": {
+    "demonym": "Costa Rican",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#7ae54d"
+  },
+  "Cuba": {
+    "demonym": "Cuban",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#524de5"
+  },
+  "Cape Verde": {
+    "demonym": "Cape Verde Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#8ce54d"
+  },
+  "Curacao": {
+    "demonym": "Curacao Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#b54de5"
+  },
+  "Christmas Island": {
+    "demonym": "Christmas Island Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e54dcf"
+  },
+  "Cyprus": {
+    "demonym": "Cyprus Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#c7e54d"
+  },
+  "Czech Republic": {
+    "demonym": "Czech Republic Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4dc9e5"
+  },
+  "Djibouti": {
+    "demonym": "Djibouti Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e5b84d"
+  },
+  "Dominica": {
+    "demonym": "Dominican",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e54dc9"
+  },
+  "Dominican Republic": {
+    "demonym": "Dominican Republic Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#91e54d"
+  },
+  "Algeria": {
+    "demonym": "Algerian",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4da1e5"
+  },
+  "Ecuador": {
+    "demonym": "Ecuador Citizen",
+    "continent": "South America",
+    "fact": "A wonderful place in South America!",
+    "color": "#e5cf4d"
+  },
+  "Estonia": {
+    "demonym": "Estonian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4d85e5"
+  },
+  "Western Sahara": {
+    "demonym": "Western Saharan",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#66e54d"
+  },
+  "Eritrea": {
+    "demonym": "Eritrean",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#d14de5"
+  },
+  "Ethiopia": {
+    "demonym": "Ethiopian",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4dc4e5"
+  },
+  "Fiji": {
+    "demonym": "Fiji Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e54de0"
+  },
+  "Falkland Islands": {
+    "demonym": "Falkland Islands Citizen",
+    "continent": "South America",
+    "fact": "A wonderful place in South America!",
+    "color": "#75e54d"
+  },
+  "Micronesia": {
+    "demonym": "Micronesian",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e54d4d"
+  },
+  "Faroe Islands": {
+    "demonym": "Faroe Islands Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#c7e54d"
+  },
+  "Gabon": {
+    "demonym": "Gabon Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4dd6e5"
+  },
+  "Grenada": {
+    "demonym": "Grenadan",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#b34de5"
+  },
+  "Georgia": {
+    "demonym": "Georgian",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e54dc7"
+  },
+  "French Guiana": {
+    "demonym": "French Guianan",
+    "continent": "South America",
+    "fact": "A wonderful place in South America!",
+    "color": "#e54de5"
+  },
+  "Guernsey": {
+    "demonym": "Guernseian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e5c94d"
+  },
+  "Ghana": {
+    "demonym": "Ghanan",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e54d66"
+  },
+  "Gibraltar": {
+    "demonym": "Gibraltar Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e54da8"
+  },
+  "Gambia": {
+    "demonym": "Gambian",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4d6be5"
+  },
+  "Guinea": {
+    "demonym": "Guinean",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#75e54d"
+  },
+  "Guadeloupe": {
+    "demonym": "Guadeloupe Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#4de5a3"
+  },
+  "Equatorial Guinea": {
+    "demonym": "Equatorial Guinean",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4de587"
+  },
+  "South Georgia and the South Sandwich Islands": {
+    "demonym": "South Georgia and the South Sandwich Islands Citizen",
+    "continent": "Antarctica",
+    "fact": "A wonderful place in Antarctica!",
+    "color": "#e54d66"
+  },
+  "Guatemala": {
+    "demonym": "Guatemalan",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#4de5cc"
+  },
+  "Guam": {
+    "demonym": "Guam Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#734de5"
+  },
+  "Guinea-Bissau": {
+    "demonym": "Guinea-Bissau Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4de570"
+  },
+  "Guyana": {
+    "demonym": "Guyanan",
+    "continent": "South America",
+    "fact": "A wonderful place in South America!",
+    "color": "#4de5bd"
+  },
+  "Heard Island and McDonald Islands": {
+    "demonym": "Heard Island and McDonald Islands Citizen",
+    "continent": "Antarctica",
+    "fact": "A wonderful place in Antarctica!",
+    "color": "#e54dc2"
+  },
+  "Honduras": {
+    "demonym": "Honduras Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#c4e54d"
+  },
+  "Croatia": {
+    "demonym": "Croatian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#9ce54d"
+  },
+  "Haiti": {
+    "demonym": "Haiti Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e54dd9"
+  },
+  "Hungary": {
+    "demonym": "Hungarian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4dcfe5"
+  },
+  "Isle of Man": {
+    "demonym": "Isle of Man Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#544de5"
+  },
+  "British Indian Ocean Territory": {
+    "demonym": "British Indian Ocean Territorian",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#4de55e"
+  },
+  "Iraq": {
+    "demonym": "Iraq Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#4db8e5"
+  },
+  "Iran": {
+    "demonym": "Iran Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#734de5"
+  },
+  "Iceland": {
+    "demonym": "Iceland Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4de5b5"
+  },
+  "Jersey": {
+    "demonym": "Jerseian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e54dd9"
+  },
+  "Jamaica": {
+    "demonym": "Jamaican",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#704de5"
+  },
+  "Jordan": {
+    "demonym": "Jordan Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#a14de5"
+  },
+  "Kyrgyzstan": {
+    "demonym": "Kyrgyzstan Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e5784d"
+  },
+  "Cambodia": {
+    "demonym": "Cambodian",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#4d78e5"
+  },
+  "Kiribati": {
+    "demonym": "Kiribati Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#a1e54d"
+  },
+  "Comoros": {
+    "demonym": "Comoros Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e5824d"
+  },
+  "Saint Kitts and Nevis": {
+    "demonym": "Saint Kitts and Nevis Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#6e4de5"
+  },
+  "North Korea": {
+    "demonym": "North Korean",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#4d8ce5"
+  },
+  "Kuwait": {
+    "demonym": "Kuwait Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#b5e54d"
+  },
+  "Cayman Islands": {
+    "demonym": "Cayman Islands Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e58c4d"
+  },
+  "Kazakhstan": {
+    "demonym": "Kazakhstan Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e54d75"
+  },
+  "Laos": {
+    "demonym": "Laos Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#d4e54d"
+  },
+  "Lebanon": {
+    "demonym": "Lebanon Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e54d82"
+  },
+  "Saint Lucia": {
+    "demonym": "Saint Lucian",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e54dc9"
+  },
+  "Liechtenstein": {
+    "demonym": "Liechtenstein Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e5734d"
+  },
+  "Sri Lanka": {
+    "demonym": "Sri Lankan",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e54dc4"
+  },
+  "Liberia": {
+    "demonym": "Liberian",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e5734d"
+  },
+  "Lesotho": {
+    "demonym": "Lesotho Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4de5c9"
+  },
+  "Lithuania": {
+    "demonym": "Lithuanian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#964de5"
+  },
+  "Luxembourg": {
+    "demonym": "Luxembourg Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#914de5"
+  },
+  "Latvia": {
+    "demonym": "Latvian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e5bd4d"
+  },
+  "Libya": {
+    "demonym": "Libyan",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#704de5"
+  },
+  "Monaco": {
+    "demonym": "Monaco Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e5ba4d"
+  },
+  "Moldova": {
+    "demonym": "Moldovan",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4de5a8"
+  },
+  "Montenegro": {
+    "demonym": "Montenegro Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4dd9e5"
+  },
+  "Saint Martin": {
+    "demonym": "Saint Martin Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e5c44d"
+  },
+  "Madagascar": {
+    "demonym": "Madagascar Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4de5b5"
+  },
+  "Marshall Islands": {
+    "demonym": "Marshall Islands Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#4da1e5"
+  },
+  "North Macedonia": {
+    "demonym": "North Macedonian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e54f4d"
+  },
+  "Mali": {
+    "demonym": "Mali Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e34de5"
+  },
+  "Myanmar (Burma)": {
+    "demonym": "Myanmar (Burma) Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e5ab4d"
+  },
+  "Mongolia": {
+    "demonym": "Mongolian",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#4de56e"
+  },
+  "Macao": {
+    "demonym": "Macao Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#c74de5"
+  },
+  "Northern Mariana Islands": {
+    "demonym": "Northern Mariana Islands Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#9e4de5"
+  },
+  "Martinique": {
+    "demonym": "Martinique Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e54dba"
+  },
+  "Mauritania": {
+    "demonym": "Mauritanian",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e5ab4d"
+  },
+  "Montserrat": {
+    "demonym": "Montserrat Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e5634d"
+  },
+  "Malta": {
+    "demonym": "Maltan",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4d96e5"
+  },
+  "Mauritius": {
+    "demonym": "Mauritius Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4db5e5"
+  },
+  "Maldives": {
+    "demonym": "Maldives Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#4de5d9"
+  },
+  "Malawi": {
+    "demonym": "Malawi Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#824de5"
+  },
+  "Mozambique": {
+    "demonym": "Mozambique Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4d99e5"
+  },
+  "Namibia": {
+    "demonym": "Namibian",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4db0e5"
+  },
+  "New Caledonia": {
+    "demonym": "New Caledonian",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e5b34d"
+  },
+  "Niger": {
+    "demonym": "Niger Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4de5b2"
+  },
+  "Norfolk Island": {
+    "demonym": "Norfolk Island Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#c7e54d"
+  },
+  "Nicaragua": {
+    "demonym": "Nicaraguan",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e5b54d"
+  },
+  "Nepal": {
+    "demonym": "Nepal Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e0e54d"
+  },
+  "Nauru": {
+    "demonym": "Nauru Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#4de3e5"
+  },
+  "Niue": {
+    "demonym": "Niue Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#b5e54d"
+  },
+  "Oman": {
+    "demonym": "Oman Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e54d7a"
+  },
+  "Panama": {
+    "demonym": "Panaman",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#4de566"
+  },
+  "Peru": {
+    "demonym": "Peru Citizen",
+    "continent": "South America",
+    "fact": "A wonderful place in South America!",
+    "color": "#e5a84d"
+  },
+  "French Polynesia": {
+    "demonym": "French Polynesian",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e5944d"
+  },
+  "Papua New Guinea": {
+    "demonym": "Papua New Guinean",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e54dcc"
+  },
+  "Saint Pierre and Miquelon": {
+    "demonym": "Saint Pierre and Miquelon Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#b5e54d"
+  },
+  "Pitcairn Islands": {
+    "demonym": "Pitcairn Islands Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#5c4de5"
+  },
+  "Palau": {
+    "demonym": "Palau Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e54d70"
+  },
+  "Paraguay": {
+    "demonym": "Paraguaian",
+    "continent": "South America",
+    "fact": "A wonderful place in South America!",
+    "color": "#4d4de5"
+  },
+  "Qatar": {
+    "demonym": "Qatar Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e54d91"
+  },
+  "Reunion": {
+    "demonym": "Reunion Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#c9e54d"
+  },
+  "Romania": {
+    "demonym": "Romanian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4de5c7"
+  },
+  "Serbia": {
+    "demonym": "Serbian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4dd9e5"
+  },
+  "Rwanda": {
+    "demonym": "Rwandan",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4d82e5"
+  },
+  "Solomon Islands": {
+    "demonym": "Solomon Islands Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#4de5d6"
+  },
+  "Seychelles": {
+    "demonym": "Seychelles Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4db0e5"
+  },
+  "Sudan": {
+    "demonym": "Sudan Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4de563"
+  },
+  "Saint Helena": {
+    "demonym": "Saint Helenan",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4de585"
+  },
+  "Slovenia": {
+    "demonym": "Slovenian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4d9ee5"
+  },
+  "Svalbard and Jan Mayen": {
+    "demonym": "Svalbard and Jan Mayen Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4de57a"
+  },
+  "Slovakia": {
+    "demonym": "Slovakian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#7d4de5"
+  },
+  "Sierra Leone": {
+    "demonym": "Sierra Leone Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e5734d"
+  },
+  "San Marino": {
+    "demonym": "San Marino Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4dc7e5"
+  },
+  "Senegal": {
+    "demonym": "Senegal Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#a8e54d"
+  },
+  "Somalia": {
+    "demonym": "Somalian",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#b34de5"
+  },
+  "Suriname": {
+    "demonym": "Suriname Citizen",
+    "continent": "South America",
+    "fact": "A wonderful place in South America!",
+    "color": "#8c4de5"
+  },
+  "South Sudan": {
+    "demonym": "South Sudan Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e54dbf"
+  },
+  "Sao Tome and Principe": {
+    "demonym": "Sao Tome and Principe Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e5cc4d"
+  },
+  "El Salvador": {
+    "demonym": "El Salvador Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e5914d"
+  },
+  "Sint Maarten": {
+    "demonym": "Sint Maarten Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#70e54d"
+  },
+  "Syria": {
+    "demonym": "Syrian",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e54dba"
+  },
+  "Eswatini": {
+    "demonym": "Eswatini Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#9ee54d"
+  },
+  "Tristan da Cunha": {
+    "demonym": "Tristan da Cunhan",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e54d52"
+  },
+  "Turks and Caicos Islands": {
+    "demonym": "Turks and Caicos Islands Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#dee54d"
+  },
+  "Chad": {
+    "demonym": "Chad Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#4de585"
+  },
+  "French Southern Territories": {
+    "demonym": "French Southern Territories Citizen",
+    "continent": "Antarctica",
+    "fact": "A wonderful place in Antarctica!",
+    "color": "#4de599"
+  },
+  "Togo": {
+    "demonym": "Togo Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#c2e54d"
+  },
+  "Tajikistan": {
+    "demonym": "Tajikistan Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#cfe54d"
+  },
+  "Tokelau": {
+    "demonym": "Tokelau Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#b8e54d"
+  },
+  "East Timor": {
+    "demonym": "East Timor Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e54d7f"
+  },
+  "Turkmenistan": {
+    "demonym": "Turkmenistan Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e5c94d"
+  },
+  "Tunisia": {
+    "demonym": "Tunisian",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#6be54d"
+  },
+  "Tonga": {
+    "demonym": "Tongan",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e56b4d"
+  },
+  "Türkiye": {
+    "demonym": "Türkiye Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#4de5b2"
+  },
+  "Trinidad and Tobago": {
+    "demonym": "Trinidad and Tobago Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#bf4de5"
+  },
+  "Tuvalu": {
+    "demonym": "Tuvalu Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#4d8ce5"
+  },
+  "Tanzania": {
+    "demonym": "Tanzanian",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e54d99"
+  },
+  "Ukraine": {
+    "demonym": "Ukraine Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4de578"
+  },
+  "Uganda": {
+    "demonym": "Ugandan",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e54d96"
+  },
+  "U.S. Minor Outlying Islands": {
+    "demonym": "U.S. Minor Outlying Islands Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#4db0e5"
+  },
+  "Uruguay": {
+    "demonym": "Uruguaian",
+    "continent": "South America",
+    "fact": "A wonderful place in South America!",
+    "color": "#bae54d"
+  },
+  "Uzbekistan": {
+    "demonym": "Uzbekistan Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#c7e54d"
+  },
+  "Vatican City": {
+    "demonym": "Vatican Citian",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#4de56b"
+  },
+  "Saint Vincent and the Grenadines": {
+    "demonym": "Saint Vincent and the Grenadines Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#e5cc4d"
+  },
+  "Venezuela": {
+    "demonym": "Venezuelan",
+    "continent": "South America",
+    "fact": "A wonderful place in South America!",
+    "color": "#e54dd4"
+  },
+  "British Virgin Islands": {
+    "demonym": "British Virgin Islands Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#4de5cc"
+  },
+  "U.S. Virgin Islands": {
+    "demonym": "U.S. Virgin Islands Citizen",
+    "continent": "North America",
+    "fact": "A wonderful place in North America!",
+    "color": "#4de5b5"
+  },
+  "Vanuatu": {
+    "demonym": "Vanuatu Citizen",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e54db8"
+  },
+  "Wallis and Futuna": {
+    "demonym": "Wallis and Futunan",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e57a4d"
+  },
+  "Samoa": {
+    "demonym": "Samoan",
+    "continent": "Oceania",
+    "fact": "A wonderful place in Oceania!",
+    "color": "#e54dc4"
+  },
+  "Kosovo": {
+    "demonym": "Kosovo Citizen",
+    "continent": "Europe",
+    "fact": "A wonderful place in Europe!",
+    "color": "#e54d85"
+  },
+  "Yemen": {
+    "demonym": "Yemen Citizen",
+    "continent": "Asia",
+    "fact": "A wonderful place in Asia!",
+    "color": "#e3e54d"
+  },
+  "Mayotte": {
+    "demonym": "Mayotte Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e54d7f"
+  },
+  "Zambia": {
+    "demonym": "Zambian",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e5c24d"
+  },
+  "Zimbabwe": {
+    "demonym": "Zimbabwe Citizen",
+    "continent": "Africa",
+    "fact": "A wonderful place in Africa!",
+    "color": "#e5a34d"
+  },
+  "USA": {
+    "demonym": "American",
+    "continent": "North America",
+    "flag": "🇺🇸",
+    "capital": "Washington DC",
+    "pop": "335 million",
+    "lang": "English",
+    "currency": "Dollar $",
+    "fact": "The US has the world's oldest written national constitution, ratified in 1788.",
+    "color": "#3C3B6E"
+  }
+}
