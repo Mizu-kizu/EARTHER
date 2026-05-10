@@ -82,11 +82,14 @@ const CUSTOM_CENTROIDS = {
 // ─────────────────────────────────────────────────────────────────────────────
 const canvas   = document.getElementById('globe-canvas');
 console.log('canvas:', canvas);
+let renderer;
 try {
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
   console.log('renderer created');
 } catch (e) {
   console.error('renderer creation failed', e);
+  // Fallback: try without antialias
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
 }
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -100,23 +103,34 @@ scene.background = new THREE.Color(0x020817);
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 0.8, CAM_DISTANCE);
 
-// const controls = new OrbitControls(camera, renderer.domElement);
-// controls.enableDamping  = true;
-// controls.dampingFactor  = 0.06;
-// controls.rotateSpeed    = 0.45;
-// controls.zoomSpeed      = 0.8;
-// controls.minDistance    = 2.2;
-// controls.maxDistance    = 9;
-// controls.enablePan      = false;
-// controls.autoRotate     = true;
-// controls.autoRotateSpeed = 0.35;
+// OrbitControls stub — provides a safe controls object even when
+// the OrbitControls library isn't loaded or is disabled.
+let controls, resumeTimer;
+try {
+  if (typeof OrbitControls !== 'undefined') {
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping   = true;
+    controls.dampingFactor   = 0.06;
+    controls.rotateSpeed     = 0.45;
+    controls.zoomSpeed       = 0.8;
+    controls.minDistance     = 2.2;
+    controls.maxDistance     = 9;
+    controls.enablePan       = false;
+    controls.autoRotate      = true;
+    controls.autoRotateSpeed = 0.35;
 
-// Pause auto-rotate on user interaction, resume after 4s idle
-// controls.addEventListener('start', () => { controls.autoRotate = false; clearTimeout(resumeTimer); });
-// let resumeTimer;
-// // controls.addEventListener('end', () => {
-//   resumeTimer = setTimeout(() => { controls.autoRotate = true; }, 4000);
-// });
+    controls.addEventListener('start', () => { controls.autoRotate = false; clearTimeout(resumeTimer); });
+    controls.addEventListener('end', () => {
+      resumeTimer = setTimeout(() => { controls.autoRotate = true; }, 4000);
+    });
+  }
+} catch(e) {
+  console.warn('OrbitControls not available:', e.message);
+}
+if (!controls) {
+  // Minimal stub so flyTo / tickFly / animate don't crash
+  controls = { autoRotate: false, target: new THREE.Vector3(), update() {} };
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Lighting — tuned for NASA topo+bathy texture
@@ -657,8 +671,10 @@ function flyTo(lat, lon, distMult = 1.0) {
   flyToPos.copy(target);
   flyProgress = 0;
   flyStart    = performance.now();
-  controls.autoRotate = false;
-  controls.target.set(0, 0, 0);  // always orbit around globe center
+  if (controls) {
+    controls.autoRotate = false;
+    controls.target.set(0, 0, 0);  // always orbit around globe center
+  }
   clearTimeout(resumeTimer);
 }
 
@@ -864,9 +880,9 @@ window.addEventListener('resize', () => {
 // ─────────────────────────────────────────────────────────────────────────────
 function animate(now) {
   requestAnimationFrame(animate);
-  // tickFly(now);
-  // doRaycast();
-  // controls.update();
+  tickFly(now);
+  doRaycast();
+  if (controls && controls.update) controls.update();
   renderer.render(scene, camera);
 }
 
@@ -874,4 +890,5 @@ function animate(now) {
 // Boot — start render loop immediately, init() adds countries in background
 // ─────────────────────────────────────────────────────────────────────────────
 requestAnimationFrame(animate);  // globe sphere visible immediately
-init();         }                 // countries load in async batches
+init();
+}  // end of init async scope

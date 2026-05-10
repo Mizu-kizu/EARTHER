@@ -356,19 +356,52 @@ client.on('interactionCreate', async interaction => {
 
 // Helper to take screenshot and send
 async function sendInteractiveMap(interaction, view, isUpdate = false) {
+    let browser;
     try {
-        const browser = await puppeteer.launch({ 
+        browser = await puppeteer.launch({ 
             headless: 'new',
-            args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-gpu',
+                '--disable-dev-shm-usage',
+                '--disable-web-security',
+                '--use-gl=swiftshader',   // Software WebGL for headless
+            ] 
         });
         const page = await browser.newPage();
         // Set high res
         await page.setViewport({ width: 1200, height: 800, deviceScaleFactor: 2 });
-        await page.goto(`http://localhost:${PORT}/?view=${view}`, { waitUntil: 'networkidle0', timeout: 10000 });
+        
+        // Log browser console errors for debugging
+        page.on('console', msg => {
+            if (msg.type() === 'error') console.log('[Puppeteer Page Error]', msg.text());
+        });
+        page.on('pageerror', err => console.log('[Puppeteer Page Crash]', err.message));
+
+        await page.goto(`http://localhost:${PORT}/?view=${view}`, { 
+            waitUntil: 'networkidle2',  // More forgiving than networkidle0
+            timeout: 30000              // 30s timeout for WebGL init
+        });
+        
+        // Wait for the loading screen to fade out + globe to render a few frames
+        await page.waitForFunction(
+            () => {
+                const loading = document.getElementById('loading');
+                return !loading || loading.style.display === 'none' || loading.classList.contains('fade-out');
+            },
+            { timeout: 20000 }
+        ).catch(() => {
+            console.log('Loading screen did not fade out, taking screenshot anyway...');
+        });
+        
+        // Give WebGL an extra moment to render
+        await new Promise(r => setTimeout(r, 2000));
         
         // Take screenshot
         const screenshotBuffer = await page.screenshot({ type: 'png' });
         await browser.close();
+        browser = null;
 
         const attachment = new AttachmentBuilder(screenshotBuffer, { name: 'map.png' });
 
@@ -415,8 +448,11 @@ async function sendInteractiveMap(interaction, view, isUpdate = false) {
         }
 
     } catch (err) {
-        console.error(err);
-        await interaction.editReply({ content: 'Failed to generate map screenshot. Is the web server running?' });
+        console.error('Map screenshot failed:', err.message);
+        console.error(err.stack);
+        await interaction.editReply({ content: `❌ Failed to generate map screenshot: ${err.message}` }).catch(() => {});
+    } finally {
+        if (browser) await browser.close().catch(() => {});
     }
 }
 
