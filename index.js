@@ -43,6 +43,41 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ─── NASA Texture Proxy ────────────────────────────────────────────────────────
+// NASA servers block browser CORS requests. We proxy them through Express so
+// globe.js can load NASA imagery without Cross-Origin errors.
+const https = require('https');
+const http  = require('http');
+
+const TEXTURE_URLS = {
+  'topo':   'https://unpkg.com/three-globe/example/img/earth-day.jpg',
+  'normal': 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_normal_2048.jpg',
+  'spec':   'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_specular_2048.jpg',
+};
+
+app.get('/tex/:id', async (req, res) => {
+  const url = TEXTURE_URLS[req.params.id];
+  if (!url) return res.status(404).send('Unknown texture');
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.error(`Upstream error ${response.status} for ${url}`);
+      return res.status(response.status).send('Upstream error');
+    }
+    const contentType = response.headers.get('content-type') || 'image/jpeg';
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    
+    const buffer = await response.arrayBuffer();
+    res.setHeader('Content-Length', buffer.byteLength);
+    res.send(Buffer.from(buffer));
+  } catch (err) {
+    console.error('Texture proxy error:', err.message);
+    res.status(502).send('Texture fetch failed');
+  }
+});
+
 // --- DISCORD BOT SETUP ---
 const client = new Client({
     intents: [
@@ -121,7 +156,7 @@ app.get('/api/counts', async (req, res) => {
     }
 });
 
-client.once('ready', async () => {
+client.once('clientReady', async () => {
     console.log(`Bot logged in as ${client.user.tag}!`);
     
     // Fetch all members on startup to ensure accurate role counts
@@ -151,7 +186,10 @@ client.once('ready', async () => {
             .setDescription('Remove your claimed country'),
         new SlashCommandBuilder()
             .setName('map')
-            .setDescription('View the live interactive map and leaderboard in Discord!')
+            .setDescription('View the live interactive map and leaderboard in Discord!'),
+        new SlashCommandBuilder()
+            .setName('mycountry')
+            .setDescription('See your citizen nation card!')
     ];
 
     try {
@@ -253,6 +291,41 @@ client.on('interactionCreate', async interaction => {
             await interaction.reply({ content: "🛰️ **Deploying satellites to scan the globe...**\n*Taking a live photo of the dashboard...*" });
             await sendInteractiveMap(interaction, 'nations');
         }
+
+        if (interaction.commandName === 'mycountry') {
+            const roles = interaction.member.roles.cache;
+            let foundCountry = null;
+            let countryName = null;
+
+            // Search for a matching nation role
+            for (const [name, data] of Object.entries(countriesData)) {
+                if (roles.some(r => r.name.toLowerCase() === data.demonym.toLowerCase() || r.name.toLowerCase() === `${name.toLowerCase()} citizen`)) {
+                    foundCountry = data;
+                    countryName = name;
+                    break;
+                }
+            }
+
+            if (!foundCountry) {
+                return interaction.reply({ content: "❓ You don't have a citizen role yet! Use `/claim [country]` first to join a nation.", ephemeral: true });
+            }
+
+            const embed = new EmbedBuilder()
+                .setColor(foundCountry.color || '#3b82f6')
+                .setTitle(`${foundCountry.flag || '🌍'}  ${countryName}`)
+                .setDescription(`Welcome, citizen of **${countryName}**!`)
+                .addFields(
+                    { name: '🏛️ Capital',    value: foundCountry.capital || 'Unknown',  inline: true },
+                    { name: '👥 Population', value: foundCountry.pop     || 'Unknown',  inline: true },
+                    { name: '🗣️ Language',   value: foundCountry.lang    || 'Unknown',  inline: true },
+                    { name: '💰 Currency',   value: foundCountry.currency|| 'Unknown',  inline: true },
+                    { name: '💡 Fun Fact',   value: foundCountry.fact    || 'A wonderful place on Earth!' }
+                )
+                .setFooter({ text: `Detected from role • ${interaction.user.username}` })
+                .setTimestamp();
+
+            await interaction.reply({ embeds: [embed] });
+        }
     }
 
     // ==========================================
@@ -352,4 +425,12 @@ app.listen(PORT, () => {
     console.log(`Live map dashboard running at http://localhost:${PORT}`);
 });
 
-client.login(process.env.DISCORD_TOKEN);
+(async () => {
+    try {
+        await client.login(process.env.DISCORD_TOKEN);
+        console.log('Bot logged in successfully');
+    } catch (error) {
+        console.error('Failed to login to Discord:', error.message);
+        process.exit(1);
+    }
+})();
