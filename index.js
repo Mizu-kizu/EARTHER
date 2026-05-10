@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, AttachmentBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, EmbedBuilder } = require('discord.js');
+const { Client, GatewayIntentBits, REST, Routes, SlashCommandBuilder, AttachmentBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, StringSelectMenuBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const express = require('express');
 const path = require('path');
 const puppeteer = require('puppeteer');
@@ -210,11 +210,12 @@ client.on('interactionCreate', async interaction => {
     // SLASH COMMANDS
     // ==========================================
     if (interaction.isChatInputCommand()) {
+        if (interaction.replied || interaction.deferred) return;
         const guild = interaction.guild;
         // Removed await guild.members.fetch() to avoid rate limits
 
         if (interaction.commandName === 'claim') {
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
 
             // Check if user already claimed
             const userRoles = interaction.member.roles.cache;
@@ -268,7 +269,7 @@ client.on('interactionCreate', async interaction => {
         }
 
         if (interaction.commandName === 'remove') {
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply({ flags: [MessageFlags.Ephemeral] });
             try {
                 const userRoles = interaction.member.roles.cache;
                 const rolesToRemove = userRoles.filter(r => 
@@ -288,7 +289,7 @@ client.on('interactionCreate', async interaction => {
         }
 
         if (interaction.commandName === 'map') {
-            await interaction.reply({ content: "🛰️ **Deploying satellites to scan the globe...**\n*Taking a live photo of the dashboard...*" });
+            await interaction.reply({ content: "🛰️ **[V2] Deploying satellites to scan the globe...**\n*Taking a live photo of the dashboard...*" });
             await sendInteractiveMap(interaction, 'nations');
         }
 
@@ -307,7 +308,7 @@ client.on('interactionCreate', async interaction => {
             }
 
             if (!foundCountry) {
-                return interaction.reply({ content: "❓ You don't have a citizen role yet! Use `/claim [country]` first to join a nation.", ephemeral: true });
+                return interaction.reply({ content: "❓ You don't have a citizen role yet! Use `/claim [country]` first to join a nation.", flags: [MessageFlags.Ephemeral] });
             }
 
             const embed = new EmbedBuilder()
@@ -332,6 +333,7 @@ client.on('interactionCreate', async interaction => {
     // BUTTON INTERACTIONS
     // ==========================================
     if (interaction.isButton()) {
+        if (interaction.replied || interaction.deferred) return;
         const targetView = interaction.customId === 'view_continents' ? 'Continents' : 'Nations';
         await interaction.update({ content: `🛰️ **Re-calibrating satellites to view ${targetView}...**\n*Processing new high-res image...*`, components: [] });
         
@@ -346,10 +348,11 @@ client.on('interactionCreate', async interaction => {
     // SELECT MENU INTERACTIONS
     // ==========================================
     if (interaction.isStringSelectMenu()) {
+        if (interaction.replied || interaction.deferred) return;
         if (interaction.customId === 'country_facts') {
             const countryName = interaction.values[0];
             const fact = countriesData[countryName]?.fact || "A wonderful place on Earth!";
-            await interaction.reply({ content: `**${countryName}**: *${fact}*`, ephemeral: true });
+            await interaction.reply({ content: `**${countryName}**: *${fact}*`, flags: [MessageFlags.Ephemeral] });
         }
     }
 });
@@ -363,10 +366,11 @@ async function sendInteractiveMap(interaction, view, isUpdate = false) {
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
-                '--disable-gpu',
+                '--enable-webgl',
+                '--ignore-certificate-errors',
                 '--disable-dev-shm-usage',
                 '--disable-web-security',
-                '--use-gl=swiftshader',   // Software WebGL for headless
+                '--use-gl=swiftshader',
             ] 
         };
         // On Render (Docker), use the pre-installed Chrome from the image
@@ -384,9 +388,10 @@ async function sendInteractiveMap(interaction, view, isUpdate = false) {
         });
         page.on('pageerror', err => console.log('[Puppeteer Page Crash]', err.message));
 
-        await page.goto(`http://localhost:${PORT}/?view=${view}`, { 
-            waitUntil: 'networkidle2',  // More forgiving than networkidle0
-            timeout: 30000              // 30s timeout for WebGL init
+        // Use 127.0.0.1 to avoid IPv6 issues on Windows
+        await page.goto(`http://127.0.0.1:${PORT}/?view=${view}`, { 
+            waitUntil: 'networkidle2',
+            timeout: 60000              // Increased to 60s
         });
         
         // Wait for the loading screen to fade out + globe to render a few frames
