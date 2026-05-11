@@ -385,7 +385,7 @@ async function sendInteractiveMap(interaction, view, isUpdate = false) {
             ] 
         };
         // On Render (Docker), use the pre-installed Chrome from the image
-        if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+        if (process.env.PUPPETEER_EXECUTABLE_PATH && fs.existsSync(process.env.PUPPETEER_EXECUTABLE_PATH)) {
             launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
         }
         browser = await puppeteer.launch(launchOptions);
