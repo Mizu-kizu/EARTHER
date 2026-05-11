@@ -361,16 +361,27 @@ client.on('interactionCreate', async interaction => {
 async function sendInteractiveMap(interaction, view, isUpdate = false) {
     let browser;
     try {
+        // --- 1. Pre-check: Ensure the local server is actually responding ---
+        const serverUrl = `http://127.0.0.1:${PORT}`;
+        try {
+            const resp = await fetch(serverUrl, { signal: AbortSignal.timeout(5000) });
+            if (!resp.ok) console.warn(`[Warning] Local server check returned status ${resp.status}`);
+        } catch (e) {
+            console.error(`[Critical] Local server check failed: ${e.message}`);
+            throw new Error(`The map server is not responding at ${serverUrl}. Please ensure the bot is started correctly.`);
+        }
+
         const launchOptions = { 
-            headless: 'new',
+            headless: true, // Use the stable new headless mode
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--enable-webgl',
-                '--ignore-certificate-errors',
+                '--use-gl=angle',
+                '--use-angle=d3d11',
+                '--ignore-gpu-blocklist',
                 '--disable-dev-shm-usage',
                 '--disable-web-security',
-                '--use-gl=swiftshader',
             ] 
         };
         // On Render (Docker), use the pre-installed Chrome from the image
@@ -400,7 +411,7 @@ async function sendInteractiveMap(interaction, view, isUpdate = false) {
                 const loading = document.getElementById('loading');
                 return !loading || loading.style.display === 'none' || loading.classList.contains('fade-out');
             },
-            { timeout: 20000 }
+            { timeout: 40000 }
         ).catch(() => {
             console.log('Loading screen did not fade out, taking screenshot anyway...');
         });

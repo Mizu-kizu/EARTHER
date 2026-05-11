@@ -200,6 +200,17 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     #loading p { color: var(--muted); font-size: 0.9rem; }
+    #loading-error { 
+      margin-top: 1rem; 
+      color: #ef4444; 
+      font-size: 0.85rem; 
+      background: rgba(239, 68, 68, 0.1); 
+      padding: 0.6rem 1rem; 
+      border-radius: 8px; 
+      display: none; 
+      max-width: 80%;
+      text-align: center;
+    }
 
     /* ── Header ── */
     #header {
@@ -433,6 +444,7 @@
 <div id="loading">
   <div class="loader-ring"></div>
   <p>Building globe...</p>
+  <div id="loading-error"></div>
 </div>
 
 <!-- Header -->

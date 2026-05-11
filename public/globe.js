@@ -3,7 +3,7 @@
  * NASA texture + normal map terrain + DoubleSide country overlays
  */
 
-console.log('globe.js loaded, THREE:', !!THREE);
+console.log('globe.js loaded, THREE:', !!window.THREE);
 const THREE = window.THREE;
 const OrbitControls = THREE.OrbitControls;
 
@@ -12,7 +12,7 @@ if (!THREE) {
   throw new Error('THREE not loaded');
 }
 
-console.log('globe.js loaded, THREE:', THREE);
+console.log('globe.js loaded, THREE:', !!window.THREE);
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 const GLOBE_R      = 1.8;
@@ -83,19 +83,33 @@ const CUSTOM_CENTROIDS = {
 const canvas   = document.getElementById('globe-canvas');
 console.log('canvas:', canvas);
 let renderer;
+// ─── Renderer Setup with Fail-Safe ───
+const loadingError = document.getElementById('loading-error');
 try {
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
-  console.log('renderer created');
+  console.log('renderer created with antialias');
 } catch (e) {
-  console.error('renderer creation failed', e);
-  // Fallback: try without antialias
-  renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
+  console.warn('Antialiased renderer failed, falling back...');
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
+    console.log('renderer created without antialias');
+  } catch (err) {
+    console.error('CRITICAL: WebGL context creation failed entirely:', err);
+    if (loadingError) {
+      loadingError.textContent = '❌ WebGL Error: Could not initialize 3D graphics. Please ensure your browser supports WebGL.';
+      loadingError.style.display = 'block';
+    }
+    // Don't throw, let the page stay on the loading screen with the error message
+  }
 }
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping      = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.4; // Boosted for better NASA texture pop
+
+if (renderer) {
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping      = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.4; 
+}
 
 const scene  = new THREE.Scene();
 scene.background = new THREE.Color(0x010409); // Slightly deeper cosmic black
@@ -431,13 +445,11 @@ function yieldFrame() {
 }
 
 async function init() {
-  console.log('init started');
   try {
     const [geoData, detailedData] = await Promise.all([
       fetch(GEO_URL).then(r => r.json()),
       fetch('/countries.json').then(r => r.json())
     ]);
-    console.log('fetches done, geoData features:', geoData.features.length);
     window.detailedNations = detailedData;
 
   const globeGroup = new THREE.Group();
@@ -492,7 +504,6 @@ async function init() {
     if (i % BATCH === 0) await yieldFrame();
   }
 
-  console.log('loop done');
   // Paint all countries onto canvas once all polygons are extracted
   paintAllCountries();
 
@@ -513,13 +524,15 @@ async function init() {
     countryMeshes.push({ mesh: ghost, name, centroid: coord, marker, isCustom: true });
   }
 
-  document.getElementById('loading').classList.add('fade-out');
-  setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 900);
+  if (renderer) {
+    document.getElementById('loading').classList.add('fade-out');
+    setTimeout(() => { document.getElementById('loading').style.display = 'none'; }, 900);
+  }
   buildSearchList();
   startPolling();
-  console.log('init finished');
-} catch (e) {
-  console.error('init error', e);
+  } catch (e) {
+    console.error('init error', e);
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -931,6 +944,7 @@ window.addEventListener('resize', () => {
 // ─────────────────────────────────────────────────────────────────────────────
 function animate(now) {
   requestAnimationFrame(animate);
+  if (!renderer) return; // Halt if WebGL failed
   tickFly(now);
   doRaycast();
   if (controls && controls.update) controls.update();
@@ -942,4 +956,3 @@ function animate(now) {
 // ─────────────────────────────────────────────────────────────────────────────
 requestAnimationFrame(animate);  // globe sphere visible immediately
 init();
-}  // end of init async scope
