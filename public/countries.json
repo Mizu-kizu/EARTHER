@@ -2,25 +2,45 @@
   "Canada": {
     "demonym": "Canadian",
     "continent": "North America",
-    "fact": "The land of maple syrup, polite folks, and breathtaking wilderness.",
+    "flag": "🇨🇦",
+    "capital": "Ottawa",
+    "pop": "40 million",
+    "lang": "English, French",
+    "currency": "Dollar $",
+    "fact": "Canada has more lakes than the rest of the world's lakes combined!",
     "color": "#b642d9"
   },
   "Mexico": {
     "demonym": "Mexican",
     "continent": "North America",
-    "fact": "The land of ancient pyramids, vibrant culture, and tacos!",
+    "flag": "🇲🇽",
+    "capital": "Mexico City",
+    "pop": "128 million",
+    "lang": "Spanish",
+    "currency": "Peso $",
+    "fact": "Mexico City is built on the ruins of the Aztec capital, Tenochtitlan.",
     "color": "#3df10a"
   },
   "Brazil": {
     "demonym": "Brazilian",
     "continent": "South America",
-    "fact": "The land of the Amazon, samba, and beautiful beaches.",
+    "flag": "🇧🇷",
+    "capital": "Brasília",
+    "pop": "215 million",
+    "lang": "Portuguese",
+    "currency": "Real R$",
+    "fact": "Brazil's Amazon rainforest produces 20% of the world's oxygen.",
     "color": "#27ca69"
   },
   "Argentina": {
     "demonym": "Argentine",
     "continent": "South America",
-    "fact": "The land of tango, Patagonia, and incredible steak.",
+    "flag": "🇦🇷",
+    "capital": "Buenos Aires",
+    "pop": "46 million",
+    "lang": "Spanish",
+    "currency": "Peso $",
+    "fact": "Argentina is the birthplace of the tango and home to incredible glaciers.",
     "color": "#bbddfc"
   },
   "Chile": {
@@ -38,31 +58,56 @@
   "United Kingdom": {
     "demonym": "British",
     "continent": "Europe",
-    "fact": "The land of Big Ben, afternoon tea, and historic castles.",
+    "flag": "🇬🇧",
+    "capital": "London",
+    "pop": "67 million",
+    "lang": "English",
+    "currency": "Pound £",
+    "fact": "The UK invented the World Wide Web, the telephone, and the steam engine.",
     "color": "#bb41b3"
   },
   "France": {
     "demonym": "French",
     "continent": "Europe",
-    "fact": "The land of romance, wine, and the Eiffel Tower.",
+    "flag": "🇫🇷",
+    "capital": "Paris",
+    "pop": "68 million",
+    "lang": "French",
+    "currency": "Euro €",
+    "fact": "France is the most visited country in the world, with 90 million tourists a year.",
     "color": "#3200a4"
   },
   "Germany": {
     "demonym": "German",
     "continent": "Europe",
-    "fact": "The land of engineering, Oktoberfest, and fairy-tale castles.",
+    "flag": "🇩🇪",
+    "capital": "Berlin",
+    "pop": "84 million",
+    "lang": "German",
+    "currency": "Euro €",
+    "fact": "Germany has over 1,500 different types of beer and 1,300 breweries.",
     "color": "#af22cd"
   },
   "Italy": {
     "demonym": "Italian",
     "continent": "Europe",
-    "fact": "The land of pasta, the Colosseum, and Renaissance art.",
+    "flag": "🇮🇹",
+    "capital": "Rome",
+    "pop": "59 million",
+    "lang": "Italian",
+    "currency": "Euro €",
+    "fact": "Italy has more UNESCO World Heritage sites than any other country.",
     "color": "#553e13"
   },
   "Spain": {
     "demonym": "Spanish",
     "continent": "Europe",
-    "fact": "The land of flamenco, tapas, and vibrant fiestas.",
+    "flag": "🇪🇸",
+    "capital": "Madrid",
+    "pop": "47 million",
+    "lang": "Spanish",
+    "currency": "Euro €",
+    "fact": "Spain produces over 40% of the world's olive oil.",
     "color": "#a17bfe"
   },
   "Sweden": {
@@ -98,31 +143,56 @@
   "Russia": {
     "demonym": "Russian",
     "continent": "Europe",
-    "fact": "The land of vast tundras, deep history, and the Trans-Siberian Railway.",
+    "flag": "🇷🇺",
+    "capital": "Moscow",
+    "pop": "144 million",
+    "lang": "Russian",
+    "currency": "Ruble ₽",
+    "fact": "Russia has the world's longest railway, the Trans-Siberian, which crosses 8 time zones.",
     "color": "#6f3107"
   },
   "China": {
     "demonym": "Chinese",
     "continent": "Asia",
-    "fact": "The land of the Great Wall, ancient dynasties, and bustling megacities.",
+    "flag": "🇨🇳",
+    "capital": "Beijing",
+    "pop": "1.41 billion",
+    "lang": "Mandarin",
+    "currency": "Yuan ¥",
+    "fact": "China built the Great Wall over 2,000 years — it's longer than the distance from NYC to LA.",
     "color": "#9221cc"
   },
   "Japan": {
     "demonym": "Japanese",
     "continent": "Asia",
-    "fact": "The land of cherry blossoms, samurai heritage, and futuristic technology.",
+    "flag": "🇯🇵",
+    "capital": "Tokyo",
+    "pop": "125 million",
+    "lang": "Japanese",
+    "currency": "Yen ¥",
+    "fact": "Japan has the world's oldest company — Kongō Gumi, founded in 578 AD.",
     "color": "#02d88d"
   },
   "India": {
     "demonym": "Indian",
     "continent": "Asia",
-    "fact": "The land of spices, the Taj Mahal, and incredibly diverse cultures.",
+    "flag": "🇮🇳",
+    "capital": "New Delhi",
+    "pop": "1.44 billion",
+    "lang": "Hindi, English",
+    "currency": "Rupee ₹",
+    "fact": "India invented chess and is the world's largest democracy.",
     "color": "#5236fd"
   },
   "South Korea": {
     "demonym": "South Korean",
     "continent": "Asia",
-    "fact": "The land of K-pop, dynamic cities, and delicious BBQ.",
+    "flag": "🇰🇷",
+    "capital": "Seoul",
+    "pop": "52 million",
+    "lang": "Korean",
+    "currency": "Won ₩",
+    "fact": "South Korea has the world's fastest average internet speed.",
     "color": "#3a6a02"
   },
   "Indonesia": {
@@ -146,7 +216,12 @@
   "Australia": {
     "demonym": "Australian",
     "continent": "Oceania",
-    "fact": "The land Down Under, kangaroos, and the Great Barrier Reef.",
+    "flag": "🇦🇺",
+    "capital": "Canberra",
+    "pop": "26 million",
+    "lang": "English",
+    "currency": "Dollar $",
+    "fact": "Over 80% of Australia's plants and animals are unique to the continent.",
     "color": "#3a56d3"
   },
   "New Zealand": {
@@ -200,13 +275,23 @@
   "Saudi Arabia": {
     "demonym": "Saudi",
     "continent": "Asia",
-    "fact": "The land of vast deserts and the birthplace of Islam.",
+    "flag": "🇸🇦",
+    "capital": "Riyadh",
+    "pop": "36 million",
+    "lang": "Arabic",
+    "currency": "Riyal ﷼",
+    "fact": "Saudi Arabia is the largest country in the world without a single permanent river.",
     "color": "#73a3b3"
   },
   "United Arab Emirates": {
     "demonym": "Emirati",
     "continent": "Asia",
-    "fact": "The land of towering skyscrapers, luxury, and the Burj Khalifa.",
+    "flag": "🇦🇪",
+    "capital": "Abu Dhabi",
+    "pop": "10 million",
+    "lang": "Arabic",
+    "currency": "Dirham د.إ",
+    "fact": "The UAE is home to the world's tallest building, the Burj Khalifa.",
     "color": "#1bd457"
   },
   "Israel": {
@@ -254,7 +339,12 @@
   "Pakistan": {
     "demonym": "Pakistani",
     "continent": "Asia",
-    "fact": "The land of majestic mountain peaks like K2 and rich cultural heritage.",
+    "flag": "🇵🇰",
+    "capital": "Islamabad",
+    "pop": "235 million",
+    "lang": "Urdu, English",
+    "currency": "Rupee ₨",
+    "fact": "Pakistan is home to K2, the second highest mountain in the world.",
     "color": "#aa2a22"
   },
   "Bangladesh": {
@@ -278,7 +368,12 @@
   "Singapore": {
     "demonym": "Singaporean",
     "continent": "Asia",
-    "fact": "The Lion City, famous for its immaculate streets and futuristic gardens.",
+    "flag": "🇸🇬",
+    "capital": "Singapore",
+    "pop": "6 million",
+    "lang": "English, Mandarin, Malay, Tamil",
+    "currency": "Dollar $",
+    "fact": "Singapore is one of only three city-states in the world.",
     "color": "#7e342e"
   },
   "Scotland": {
@@ -1544,7 +1639,12 @@
   "USA": {
     "demonym": "American",
     "continent": "North America",
-    "fact": "The land of the free, Hollywood, and endless road trips.",
-    "color": "#ba737e"
+    "flag": "🇺🇸",
+    "capital": "Washington DC",
+    "pop": "335 million",
+    "lang": "English",
+    "currency": "Dollar $",
+    "fact": "The US has the world's oldest written national constitution, ratified in 1788.",
+    "color": "#3C3B6E"
   }
 }
